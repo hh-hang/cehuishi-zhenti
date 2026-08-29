@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "监听真题目录",
+      "type": "process",
+      "command": "node",
+      "args": ["scripts/watch-catalog.mjs"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "更新真题索引",
+      "type": "process",
+      "command": "node",
+      "args": ["scripts/generate-catalog.mjs"],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

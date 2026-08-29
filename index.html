@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#070b10">
+  <meta name="description" content="注册测绘师历年真题在线答题与练习">
+  <title>注册测绘师历年真题</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070b10;
+      --bg-2: #0b121a;
+      --panel: #0e1720;
+      --card: #101923;
+      --card-2: #0b141d;
+      --line: #263548;
+      --line-bright: #344b65;
+      --text: #e8eef5;
+      --muted: #9dabb9;
+      --blue: #3b82f6;
+      --cyan: #38bdf8;
+      --green: #4ade80;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--bg);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 82% -8%, rgb(37 99 235 / 24%), transparent 32rem),
+        radial-gradient(circle at -8% 62%, rgb(14 165 233 / 8%), transparent 28rem),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 74px;
+      border-bottom: 1px solid rgb(38 53 72 / 72%);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid #3b5878;
+      border-radius: 10px;
+      color: #dbeafe;
+      background: linear-gradient(135deg, rgb(37 99 235 / 42%), rgb(56 189 248 / 12%));
+      box-shadow: inset 0 1px 0 rgb(255 255 255 / 8%);
+    }
+
+    .library {
+      padding: 64px 0 82px;
+    }
+
+    .section-heading {
+      display: flex;
+      gap: 24px;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+
+    .section-heading h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 44px);
+      letter-spacing: -.035em;
+    }
+
+    .section-copy {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .collection-count {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .subject-group {
+      padding: 30px 0 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .subject-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 17px;
+    }
+
+    .subject-heading h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -.02em;
+    }
+
+    .subject-count,
+    .subject-empty {
+      color: #7f90a2;
+      font-size: 12px;
+    }
+
+    .subject-empty {
+      margin: 0;
+      padding: 8px 0 2px;
+    }
+
+    .exam-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .exam-card {
+      position: relative;
+      min-height: 240px;
+      padding: 22px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: linear-gradient(180deg, var(--card), #0e171f);
+      box-shadow: 0 7px 20px rgb(0 0 0 / 13%);
+    }
+
+    .exam-card.available {
+      display: flex;
+      flex-direction: column;
+      border-color: #334b66;
+      text-decoration: none;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .exam-card.available:hover {
+      border-color: #4c79aa;
+      box-shadow: 0 18px 38px rgb(0 0 0 / 25%);
+      transform: translateY(-4px);
+    }
+
+    .exam-card.available:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
+    }
+
+    .exam-card.available::after {
+      position: absolute;
+      right: -48px;
+      bottom: -74px;
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgb(59 130 246 / 16%);
+      border-radius: 50%;
+      box-shadow: 0 0 0 34px rgb(59 130 246 / 4%);
+      content: "";
+    }
+
+    .exam-card h3 {
+      margin: 0 0 8px;
+      font-size: 23px;
+      line-height: 1.35;
+      letter-spacing: -.025em;
+    }
+
+    .exam-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .exam-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px 14px;
+      margin-top: 19px;
+      color: #aebdcb;
+      font-size: 12px;
+    }
+
+    .exam-meta span::before {
+      margin-right: 6px;
+      color: #60a5fa;
+      content: "·";
+    }
+
+    .start-link {
+      display: inline-flex;
+      z-index: 1;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: auto;
+      padding-top: 24px;
+      color: #dbeafe;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .start-link b {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      font-size: 17px;
+    }
+
+    .site-footer {
+      display: flex;
+      gap: 20px;
+      justify-content: flex-end;
+      padding: 27px 0 36px;
+      border-top: 1px solid var(--line);
+      color: #718294;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 840px) {
+      .exam-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .exam-card {
+        min-height: 220px;
+      }
+
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        width: min(100% - 22px, 1120px);
+      }
+
+      .site-header {
+        min-height: 64px;
+      }
+
+      .library {
+        padding: 42px 0 60px;
+      }
+
+      .section-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .site-footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .exam-card.available {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="注册测绘师历年真题首页">
+        <span class="brand-mark" aria-hidden="true">测</span>
+        <span>注册测绘师历年真题</span>
+      </a>
+    </header>
+
+    <main>
+      <section class="library" aria-labelledby="library-title">
+        <div class="section-heading">
+          <div>
+            <h1 id="library-title">历年真题</h1>
+            <p class="section-copy">选择科目和年份，开始在线答题。</p>
+          </div>
+          <span id="collectionCount" class="collection-count">已收录 2 套真题</span>
+        </div>
+
+        <div id="examCatalog" class="subject-catalog">
+          <section class="subject-group">
+            <div class="subject-heading">
+              <h2>测绘综合能力</h2>
+              <span class="subject-count">1 套</span>
+            </div>
+            <div class="exam-grid">
+              <a class="exam-card available" href="exams/测绘综合能力-2025.html" data-exam-file="测绘综合能力-2025.html">
+                <h3>2025 年真题</h3>
+                <p>测绘综合能力 2025 年真题在线答题与练习。</p>
+                <div class="exam-meta">
+                  <span>2025 年</span>
+                  <span>HTML 试卷</span>
+                </div>
+                <span class="start-link">开始答题 <b aria-hidden="true">→</b></span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>本项目用于个人学习与交流，答案与解析仅供参考。</span>
+    </footer>
+  </div>
+  <script src="exams/catalog.js"></script>
+  <script>
+    const subjects = ["测绘综合能力", "测绘管理与法律法规", "测绘案例分析"];
+    const subjectOrder = new Map(subjects.map((subject, index) => [subject, index]));
+    const filePattern = /^(测绘综合能力|测绘管理与法律法规|测绘案例分析)-((?:19|20)\d{2})\.html$/iu;
+    const examCatalog = document.getElementById("examCatalog");
+    const collectionCount = document.getElementById("collectionCount");
+    const generatedFiles = Array.isArray(window.CEHUISHI_EXAMS) ? window.CEHUISHI_EXAMS : [];
+    const fallbackFiles = [...new Set([
+      ...generatedFiles,
+      ...[...document.querySelectorAll("[data-exam-file]")].map(element => element.dataset.examFile)
+    ])];
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      })[character]);
+    }
+
+    function parseExamFiles(fileNames) {
+      const uniqueNames = [...new Set(fileNames)];
+
+      return uniqueNames
+        .map(name => {
+          const match = name.match(filePattern);
+          return match ? { name, subject: match[1], year: Number(match[2]) } : null;
+        })
+        .filter(Boolean)
+        .sort((a, b) => subjectOrder.get(a.subject) - subjectOrder.get(b.subject) || b.year - a.year);
+    }
+
+    function renderExamFiles(exams) {
+      collectionCount.textContent = `已收录 ${exams.length} 套真题`;
+
+      examCatalog.innerHTML = subjects.map((subjectName, subjectIndex) => {
+        const subject = escapeHtml(subjectName);
+        const subjectExams = exams.filter(exam => exam.subject === subjectName);
+        const cards = subjectExams.map(exam => {
+          const year = escapeHtml(exam.year);
+          const href = `exams/${encodeURIComponent(exam.name)}`;
+
+          return `<a class="exam-card available" href="${href}" data-exam-file="${escapeHtml(exam.name)}">
+            <h3>${year} 年真题</h3>
+            <p>${subject} ${year} 年真题在线答题与练习。</p>
+            <div class="exam-meta">
+              <span>${year} 年</span>
+              <span>HTML 试卷</span>
+            </div>
+            <span class="start-link">开始答题 <b aria-hidden="true">→</b></span>
+          </a>`;
+        }).join("");
+
+        return `<section class="subject-group" aria-labelledby="subject-${subjectIndex}">
+          <div class="subject-heading">
+            <h2 id="subject-${subjectIndex}">${subject}</h2>
+            <span class="subject-count">${subjectExams.length ? `${subjectExams.length} 套` : "暂无真题"}</span>
+          </div>
+          ${cards ? `<div class="exam-grid">${cards}</div>` : '<p class="subject-empty">暂无已收录真题</p>'}
+        </section>`;
+      }).join("");
+    }
+
+    async function readLocalDirectory() {
+      const directoryUrl = new URL("exams/", window.location.href);
+      const response = await fetch(directoryUrl, { cache: "no-store" });
+
+      if (!response.ok) throw new Error("无法读取本地真题目录");
+
+      const directoryHtml = await response.text();
+      const directoryDocument = new DOMParser().parseFromString(directoryHtml, "text/html");
+
+      return [...directoryDocument.querySelectorAll("a[href]")]
+        .map(link => {
+          try {
+            const url = new URL(link.getAttribute("href"), directoryUrl);
+            return decodeURIComponent(url.pathname.split("/").filter(Boolean).pop() || "");
+          } catch {
+            return "";
+          }
+        });
+    }
+
+    async function readGitHubPagesDirectory() {
+      const hostMatch = window.location.hostname.match(/^([^.]+)\.github\.io$/i);
+      if (!hostMatch) return [];
+
+      const owner = hostMatch[1];
+      const pathParts = window.location.pathname.split("/").filter(Boolean);
+      const repository = pathParts[0] || `${owner}.github.io`;
+      const endpoint = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repository)}/contents/exams`;
+      const response = await fetch(endpoint, {
+        headers: {
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28"
+        }
+      });
+
+      if (!response.ok) throw new Error("无法读取 GitHub 真题目录");
+
+      const files = await response.json();
+      return Array.isArray(files)
+        ? files.filter(file => file.type === "file").map(file => file.name)
+        : [];
+    }
+
+    async function discoverExams() {
+      let fileNames = [];
+
+      try {
+        fileNames = window.location.hostname.endsWith(".github.io")
+          ? await readGitHubPagesDirectory()
+          : await readLocalDirectory();
+      } catch {
+        fileNames = fallbackFiles;
+      }
+
+      const exams = parseExamFiles([...fallbackFiles, ...fileNames]);
+      renderExamFiles(exams);
+    }
+
+    renderExamFiles(parseExamFiles(fallbackFiles));
+    discoverExams();
+  </script>
+</body>
+</html>
