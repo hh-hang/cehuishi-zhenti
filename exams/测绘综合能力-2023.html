@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b10">
+<title>2023年注册测绘师｜测绘综合能力真题</title>
+<style>
+:root{
+  --bg:#070b10;--bg2:#0b121a;--card:#101923;--card2:#0b141d;--line:#263548;
+  --text:#e8eef5;--muted:#9dabb9;--blue:#3b82f6;--blue2:#38bdf8;
+  --green:#4ade80;--yellow:#fbbf24;--red:#fb7185;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{
+  margin:0;min-height:100vh;color:var(--text);line-height:1.68;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  background:radial-gradient(circle at 85% -5%,rgba(37,99,235,.18),transparent 31%),linear-gradient(180deg,var(--bg),var(--bg2));
+}
+button,input,label{touch-action:manipulation}
+.wrap{width:min(1060px,100%);margin:0 auto;padding:24px 18px calc(155px + env(safe-area-inset-bottom))}
+.hero{
+  background:linear-gradient(135deg,rgba(37,99,235,.17),rgba(14,165,233,.04)),#0e1720;
+  border:1px solid #2b3b50;border-radius:18px;padding:24px;margin-bottom:14px;
+  box-shadow:0 14px 34px rgba(0,0,0,.22)
+}
+.hero h1{font-size:27px;margin:0 0 7px;line-height:1.35}
+.hero p{margin:5px 0;color:#c6d2de}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.tag{padding:4px 9px;border-radius:999px;font-size:12px;color:#bfdbfe;background:rgba(59,130,246,.10);border:1px solid rgba(96,165,250,.2)}
+.tag.warn{color:#fde68a;background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.25)}
+.source-note{margin-top:12px;padding:10px 12px;background:#09131d;border:1px solid #2a3a4d;border-radius:10px;color:#b7c5d3;font-size:13px}
+.topbar{
+  position:sticky;top:5px;z-index:40;background:rgba(7,12,18,.94);backdrop-filter:blur(14px);
+  border:1px solid #263649;border-radius:13px;padding:9px 11px;margin-bottom:12px;
+  display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center
+}
+.pbg{height:8px;background:#182536;border-radius:99px;overflow:hidden}
+.pbar{height:100%;width:0;background:linear-gradient(90deg,#2563eb,#38bdf8);transition:.2s}
+.ptxt,.page-status{font-size:12px;color:#b2bfcc;white-space:nowrap}
+.page-status{grid-column:1/-1;display:flex;justify-content:space-between;gap:8px}
+.section{font-size:14px;font-weight:800;color:#c7d5e3;margin:19px 2px 7px}
+.q{
+  border:1px solid var(--line);background:linear-gradient(180deg,var(--card),#0e171f);
+  border-radius:14px;padding:19px;margin:12px 0;box-shadow:0 5px 15px rgba(0,0,0,.13)
+}
+.q.unsure{border-color:rgba(245,158,11,.72)}
+.q.disputed{box-shadow:inset 3px 0 0 #a78bfa}
+.qh{display:flex;align-items:flex-start;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.badge,.topic,.dispute{font-size:12px;font-weight:800;border-radius:999px;padding:2px 8px}
+.badge{color:#93c5fd;background:rgba(59,130,246,.11);border:1px solid rgba(59,130,246,.2)}
+.topic{color:#a7f3d0;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.17)}
+.dispute{color:#ddd6fe;background:rgba(139,92,246,.12);border:1px solid rgba(167,139,250,.28)}
+.qt{font-size:16px;font-weight:760;flex:1;min-width:250px}
+.opt{
+  display:flex;align-items:flex-start;min-height:47px;width:100%;padding:10px 11px;margin:8px 0;
+  border:1px solid var(--line);border-radius:10px;background:var(--card2);cursor:pointer;font-size:15px
+}
+.opt:hover{border-color:#3b82f6;background:#122032}
+.opt.checked{border-color:#3b82f6;background:rgba(37,99,235,.18)}
+.opt input{width:18px;height:18px;flex:none;margin:3px 9px 0 0;accent-color:#3b82f6}
+.guess{
+  display:flex;align-items:center;min-height:45px;margin-top:11px;padding-top:9px;border-top:1px dashed #304052;
+  color:#f5c64d;font-size:14px;cursor:pointer
+}
+.guess input{width:19px;height:19px;margin-right:8px;accent-color:#eaa71b}
+.fb{display:none;margin-top:11px;padding:11px 12px;border-radius:10px;font-size:14px}
+.fb.show.ok{display:block;background:rgba(34,197,94,.10);border:1px solid rgba(74,222,128,.22);color:#a7efbf}
+.fb.show.bad{display:block;background:rgba(244,63,94,.10);border:1px solid rgba(251,113,133,.22);color:#ffb1bd}
+.fb.show.warn{display:block;background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.25);color:#f9d775}
+.fb.show.disp{display:block;background:rgba(139,92,246,.11);border:1px solid rgba(167,139,250,.26);color:#ddd6fe}
+.result{display:none;margin:18px 0;padding:18px;border:1px solid #304159;border-radius:15px;background:linear-gradient(135deg,#111827,#172033)}
+.result.show{display:block}.score{font-size:30px;font-weight:900;color:#a9ccff}.result-tip{font-size:14px;color:#c4d0dc;margin:4px 0 12px}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.metric{border:1px solid #2b3c50;border-radius:10px;background:#0d1620;padding:8px;text-align:center;color:#aebac7;font-size:12px}
+.metric strong{display:block;color:#fff;font-size:18px}
+.review{margin-top:11px;padding:10px 12px;border:1px solid #304159;border-radius:10px;background:#0b141d;color:#bac7d4;font-size:13px}
+.pager{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;
+  margin:16px 0 8px;padding:9px;border:1px solid #29394c;border-radius:13px;background:#0b141d
+}
+.pager button,.page-pill,.actions button,.nav-grid button{min-height:44px;border-radius:9px;border:0;font-weight:800}
+.pager button{background:#1b2938;color:#e9f1f8;padding:9px 13px;cursor:pointer}
+.pager button:disabled{opacity:.35;cursor:not-allowed}
+.page-pill{text-align:center;display:flex;align-items:center;justify-content:center;color:#cbd5e1;padding:0 12px;font-size:13px}
+.actions{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:max(8px,env(safe-area-inset-bottom));
+  z-index:50;width:min(1020px,calc(100% - 20px));display:grid;grid-template-columns:1.2fr 1fr .8fr;
+  gap:7px;padding:9px;background:rgba(7,12,17,.95);backdrop-filter:blur(14px);border:1px solid #263344;border-radius:14px
+}
+.actions button{padding:9px 11px;color:#fff;cursor:pointer;font-size:14px}
+.primary{background:linear-gradient(135deg,#2563eb,#3b82f6)}.copy{background:#0f766e}.secondary{background:#202d3b;border:1px solid #3a4b5e!important}
+.actions button:disabled{opacity:.45;cursor:not-allowed}
+.msg{text-align:center;min-height:20px;font-size:13px;color:#87e5a9}
+.fab-nav{
+  position:fixed;right:14px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:49;
+  width:48px;height:48px;border-radius:50%;border:1px solid #3a4b61;background:#152337;color:#dbeafe;font-weight:900;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);cursor:pointer
+}
+.modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:16px}
+.modal.show{display:flex}.panel{width:min(780px,100%);max-height:88vh;overflow:auto;background:#101a26;border:1px solid #3a5069;border-radius:14px;padding:15px}
+.panel h3{margin:0 0 10px}.panel-note{font-size:13px;color:#aebdcb;margin-bottom:10px}
+.nav-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.nav-grid button{background:#192637;color:#cbd5e1;border:1px solid #30445a;cursor:pointer;padding:0}
+.nav-grid button.answered{background:#173967;border-color:#3b82f6;color:#dbeafe}
+.nav-grid button.unsure{background:#4b350d;border-color:#a87918;color:#fde68a}
+.nav-grid button.current{outline:2px solid #7dd3fc;outline-offset:1px}
+.nav-grid button.correct{background:#133b27;border-color:#2c7a4a;color:#b7f7cd}
+.nav-grid button.wrong{background:#491923;border-color:#8e3447;color:#ffc0c9}
+.nav-grid button.partial{background:#49370e;border-color:#926f1d;color:#ffe09a}
+.nav-grid button.disputed-after{background:#35255b;border-color:#7558a5;color:#e2d5ff}
+.panel textarea{width:100%;height:350px;background:#07101a;color:#eef5fb;border:1px solid #30465c;border-radius:8px;padding:10px;font:14px/1.55 "Microsoft YaHei";resize:vertical}
+.close-row{display:flex;justify-content:flex-end;margin-top:10px}.close-row button{min-height:44px;padding:9px 18px;background:#2563eb;color:white;border:0;border-radius:9px;font-weight:800}
+.lock-note{display:none;padding:8px 11px;border-radius:9px;background:#11233a;border:1px solid #2f527a;color:#b9d8ff;font-size:13px;margin:8px 0}
+.lock-note.show{display:block}
+@media(max-width:700px){
+ .wrap{padding:12px 9px calc(150px + env(safe-area-inset-bottom))}
+ .hero{padding:17px 14px;border-radius:15px}.hero h1{font-size:21px}
+ .hero p{font-size:14px}.source-note{font-size:12px}
+ .topbar{top:3px}.qt{font-size:16px;min-width:210px}.q{padding:14px 11px;margin:10px 0}.opt{font-size:15px;padding:11px 9px}
+ .metrics{grid-template-columns:repeat(2,1fr)}.metrics .metric:last-child{grid-column:1/-1}
+ .pager{grid-template-columns:1fr 1fr}.page-pill{grid-column:1/-1;grid-row:1}.pager .prev{grid-column:1}.pager .next{grid-column:2}
+ .actions{grid-template-columns:1fr 1fr 1fr;width:calc(100% - 12px);bottom:max(5px,env(safe-area-inset-bottom));padding:6px}
+ .actions button{font-size:12px;padding:8px 5px}
+ .nav-grid{grid-template-columns:repeat(8,1fr);gap:5px}
+ .fab-nav{right:10px;bottom:calc(69px + env(safe-area-inset-bottom));width:46px;height:46px}
+}
+@media(max-width:390px){.nav-grid{grid-template-columns:repeat(7,1fr)}.badge,.topic,.dispute{font-size:11px}.page-status{font-size:11px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="hero">
+<h1>2023年注册测绘师｜测绘综合能力真题</h1>
+<p>100题：1—80单项选择题，每题1分；81—100多项选择题，每题2分。满分120分。</p>
+<div class="tags"><span class="tag">2023真题原卷</span><span class="tag">电脑 + 手机</span><span class="tag">10题/页</span><span class="tag">自动保存</span><span class="tag">全部解析</span><span class="tag warn">可标记“不确定/蒙”</span></div>
+<div class="source-note"><b>说明：</b>本卷答案与解析均作为参考。少数规范口径或题目表述存在争议的题目已标为“争议题”，只要作答即给满分，避免影响整卷成绩判断。</div>
+</section>
+
+<div class="topbar">
+  <div class="pbg"><div id="pbar" class="pbar"></div></div><div id="ptxt" class="ptxt">已作答 0 / 100</div>
+  <div class="page-status"><span id="pageInfo">第 1 / 10 页</span><span id="rangeInfo">1—10题</span></div>
+</div>
+<div id="lockNote" class="lock-note">已提交。本卷答案已锁定，全部题目解析均已开启；可翻页或用题号导航逐题查看。</div>
+<div id="quiz"></div>
+<div class="pager"><button class="prev" id="prevBtn" onclick="prevPage()">← 上一页</button><div class="page-pill" id="pagePill">第 1 / 10 页</div><button class="next" id="nextBtn" onclick="nextPage()">下一页 →</button></div>
+<section id="result" class="result"></section>
+<div id="msg" class="msg"></div>
+</div>
+
+<button class="fab-nav" aria-label="题号导航" onclick="openNav()">☷</button>
+<div class="actions">
+  <button class="primary" id="submitBtn" onclick="submitQuiz()">提交并判分</button>
+  <button class="copy" onclick="copyResults()">复制结果</button>
+  <button class="secondary" onclick="resetQuiz()">重新作答</button>
+</div>
+
+<div id="navModal" class="modal"><div class="panel"><h3>题号导航</h3><div class="panel-note">蓝色=已答，黄色=不确定；提交后绿色=正确，红色=错误，橙色=少选，紫色=争议题。</div><div id="navGrid" class="nav-grid"></div><div class="close-row"><button onclick="closeNav()">关闭</button></div></div></div>
+<div id="copyModal" class="modal"><div class="panel"><h3>请手动复制答题结果</h3><textarea id="copyArea"></textarea><div class="close-row"><button onclick="closeCopy()">关闭</button></div></div></div>
+
+<script>
+const quizId='zcchs-2023-real-comprehensive-paged-v1';
+const pageSize=10;
+const qs=[{"t":"s","topic":"大地测量","q":"假设椭球的长半轴为100，短半轴为92，则扁率是（ ）。","o":["A. 1/12.5","B. 1/11.5","C. 1/2.4","D. 1/2.6"],"a":["A"],"e":"椭球扁率 f=(a-b)/a=(100-92)/100=0.08=1/12.5。"},{"t":"s","topic":"大地测量","q":"我国的高程系统采用（ ）。","o":["A. 大地高","B. 正高","C. 正常高","D. 椭球"],"a":["C"],"e":"我国国家高程系统采用正常高系统。"},{"t":"s","topic":"大地测量","q":"三差改正的内容不包括（ ）。","o":["A. 垂线偏差","B. 投影差","C. 标高差","D. 截面差"],"a":["B"],"e":"大地方向观测归算中的“三差改正”通常指垂线偏差、标高差和截面差改正，不包括投影差。"},{"t":"s","topic":"大地测量","q":"经度为116°47′32″的点位于3°带的带号是（ ）。","o":["A. 38","B. 39","C. 40","D. 41"],"a":["B"],"e":"3°分带带号 n≈L/3，116°47′32″最接近117°中央经线，对应第39带。"},{"t":"s","topic":"大地测量","q":"不会对观测误差产生影响的是（ ）。","o":["A. 仪器","B. 观测者","C. 数据处理误差","D. 环境"],"a":["C"],"e":"观测误差的主要来源包括仪器、观测者和外界环境。数据处理错误发生在观测之后，不属于观测误差的产生因素。"},{"t":"s","topic":"大地测量","q":"三角高程观测过程中，下列做法不能削弱大气垂直折光影响的是（ ）。","o":["A. 选择有利观测时间","B. 提高视线高度","C. 增加垂直角测回数","D. 采用中间法观测"],"a":["C"],"e":"垂直折光具有系统性。增加垂直角测回数主要削弱偶然误差，不能有效消除折光影响；选择有利时间、提高视线高度和对称/中间观测有助于削弱折光。"},{"t":"s","topic":"大地测量","q":"以下哪个属于角度系统误差（ ）。","o":["A. 读数误差","B. 水平度盘偏心误差","C. 观测误差","D. 对中误差"],"a":["B"],"e":"水平度盘偏心属于仪器系统误差，可通过适当的观测程序削弱；读数、对中等通常不属于题目所指的角度系统误差。"},{"t":"s","topic":"大地测量","q":"GNSS观测网中共42个点，平均每点观测2个时段，共6台接收机，求同步环个数（ ）。","o":["A. 21","B. 14","C. 11","D. 7"],"a":["B"],"e":"总设站次数为42×2=84；6台接收机同时观测构成一个同步观测时段，因此共有84÷6=14个同步观测时段，按本题口径选14。"},{"t":"s","topic":"大地测量","q":"GNSS网无约束平差中，基线分量改正数的绝对值最大不应超过基线测量中误差的（ ）倍。","o":["A. 1","B. 2","C. 3","D. 4"],"a":["C"],"e":"GNSS网无约束平差成果检核中，基线分量改正数绝对值一般不应超过相应基线测量中误差的3倍。"},{"t":"s","topic":"大地测量","q":"GNSS控制网约束平差的主要目的是（ ）。","o":["A. 获得控制网在国家坐标系或地方坐标系中的坐标","B. 计算同步环闭合差","C. 获得各点之间的相对位置","D. 检验网的内符合精度"],"a":["A"],"e":"约束平差通过已知点、已知尺度或方向等约束，把GNSS网纳入所需的国家或地方坐标系统。"},{"t":"s","topic":"大地测量","q":"在动态伪距单点定位中，观测2个历元，每个历元有5颗卫星，则总的多余观测数量是（ ）。","o":["A. 5","B. 4","C. 3","D. 2"],"a":["D"],"e":"每个历元有5个伪距观测，未知参数通常为X、Y、Z和接收机钟差4个，因此每历元多余观测数为1；两个历元共2个。"},{"t":"s","topic":"大地测量","q":"下列不属于经典平差方法的是（ ）。","o":["A. 条件平差","B. 附有参数的条件平差","C. 拟稳平差","D. 间接平差"],"a":["C"],"e":"经典测量平差基本方法包括条件平差、间接平差和附有参数的条件平差等；拟稳平差属于现代网平差中的专门方法。"},{"t":"s","topic":"大地测量","q":"三条水准路线的长度分别是2公里、6公里、3公里，它们的权重比为（ ）。","o":["A. 9:1:4","B. 3:1:2","C. 1:9:4","D. 1:3:2"],"a":["B"],"e":"水准路线权通常与路线长度成反比：1/2:1/6:1/3，同乘6得3:1:2。"},{"t":"s","topic":"大地测量","q":"闭合导线共5个导线点，5个内角各观测两测回，每次（每个内角一测回）测量中误差为±40″，导线角度闭合差中误差为（ ）。","o":["A. ±89.4″","B. ±100″","C. ±63.2″","D. ±44.7″"],"a":["C"],"e":"每个内角两测回平均值中误差为40/√2；5个独立内角和的中误差为(40/√2)×√5≈63.2″。"},{"t":"s","topic":"大地测量","q":"三等水准观测的标尺读数顺序为（ ）。","o":["A. 后后前前","B. 后前后前","C. 后前前后","D. 前后后前"],"a":["C"],"e":"三等水准每站常采用“后—前—前—后”的读数顺序，以削弱仪器随时间变化等影响。"},{"t":"s","topic":"海洋测绘","q":"多波束参数校正顺序通常为（ ）。","o":["A. 纵摇、横摇、艏偏、导航延迟","B. 导航延迟、横摇、纵摇、艏偏","C. 横摇、纵摇、艏偏、导航延迟","D. 道偏、横摇、艏偏、导航延迟"],"a":["B"],"e":"多波束安装参数校准通常先处理导航延迟，再依次校准横摇、纵摇和艏偏等安装偏差。"},{"t":"s","topic":"工程测量","q":"控制网的图形和观测值的先验精度已定的情况下，优化起算数据属于（ ）。","o":["A. 三类设计","B. 二类设计","C. 一类设计","D. 零类设计"],"a":["D"],"e":"控制网优化设计中，零类设计研究基准/起算数据；一类设计研究网形；二类设计研究权或观测精度；三类设计研究现有网的改进。"},{"t":"s","topic":"工程测量","q":"采用导线测量法施测工程控制网时，导线网的布设原则正确的是（ ）。","o":["A. 作为测区首级控制网时应布设成闭合网","B. 作为测区首级控制网时应联测1个已知方向","C. 结点间的导线段宜布设成环形","D. 相邻边长的长度比例关系可随意调节"],"a":["A"],"e":"作为测区首级控制网的导线网应形成可靠的闭合或附合控制结构，以便检核；其余表述不符合规范化布网原则。"},{"t":"s","topic":"大地测量","q":"GNSS控制网测量中误差的计算公式 m=√{(1/3N)[WW/n]} 中，n表示（ ）。","o":["A. 同步环的个数","B. 同步环的边数","C. 异步环的个数","D. 异步环的边数"],"a":["D"],"e":"该类环闭合差统计公式中，n表示相应异步环的边数。"},{"t":"s","topic":"工程测量","q":"下列等高线间的高差最小的是（ ）。","o":["A. 相邻首曲线","B. 相邻首曲线与计曲线","C. 相邻计曲线与间曲线之间的高差","D. 相邻助曲线和间曲线之间的高差"],"a":["D"],"e":"首曲线间隔为基本等高距，间曲线通常为1/2等高距，助曲线通常为1/4等高距，因此助曲线与相邻间曲线间的高差最小。"},{"t":"s","topic":"工程测量","q":"北京地区日照变形观测的最佳季节是（ ）。","o":["A. 春季","B. 夏季","C. 秋季","D. 冬季"],"a":["B"],"e":"日照变形观测宜在太阳辐射强、温度变化显著的季节进行，北京地区通常选择夏季。"},{"t":"s","topic":"房产测绘","q":"建筑密集区的房产控制点间距一般是（ ）m。","o":["A. 50","B. 100","C. 150","D. 200"],"a":["B"],"e":"建筑密集区房产控制点布设密度较高，本题规范型参考值为约100m。"},{"t":"s","topic":"房产测绘","q":"下列以顶盖投影为准计算面积的是（ ）。","o":["A. 独立柱门廊","B. 架空通廊","C. 结构内的阳台","D. 结构外的阳台"],"a":["A"],"e":"有顶盖、独立柱支承的门廊，其面积按顶盖水平投影面积的相应规则计算；本题参考答案为独立柱门廊。"},{"t":"s","topic":"房产测绘","q":"计算全部建筑面积的是（ ）。","o":["A. 房间内安装的上货平台","B. 楼房内垂直方向管道井","C. 套内未封闭阳台","D. 有围护无上盖的室外楼梯"],"a":["B"],"e":"楼房内的管道井属于建筑内部永久性结构空间，按其自然层计算建筑面积；未封闭阳台等按相应规则处理，不一定计全部面积。"},{"t":"s","topic":"房产测绘","q":"下列建筑部位可被分摊的是（ ）。","o":["A. 屋顶的花园广场","B. 为多幢服务的门卫室","C. 地下室人防车库","D. 楼内公共走廊"],"a":["D"],"e":"为本幢各产权单元共同服务的公共走廊属于共有建筑面积，可按规定参与分摊；屋顶花园、人防及为多幢服务的设施一般不作为本幢可分摊共有面积。"},{"t":"s","topic":"地籍测绘","q":"地籍控制网可以分为几个层级（ ）。","o":["A. 二","B. 三","C. 四","D. 五"],"a":["B"],"e":"地籍平面控制网通常按首级控制、加密控制和图根控制等层次组织，本题参考答案为三级。"},{"t":"s","topic":"地籍测绘","q":"采用交会法测量界址点，交会角最小不应小于（ ）。","o":["A. 25°","B. 30°","C. 35°","D. 40°"],"a":["B"],"e":"交会几何图形过于尖锐会放大点位误差，界址点交会角按本题规范口径不应小于30°。"},{"t":"s","topic":"地籍测绘","q":"不可用于集体土地所有权调查的比例尺是（ ）。","o":["A. 1:1000","B. 1:10000","C. 1:50000","D. 1:100000"],"a":["D"],"e":"集体土地所有权调查工作底图可采用相应的大、中比例尺，1:100000过小，不属于本题规定的适用比例尺。"},{"t":"s","topic":"行政区域界线测绘","q":"下列边界点和界桩点的说法中，正确的是（ ）。","o":["A. 界桩点可以是边界点","B. 界桩点一定在边界线上","C. 边界点一定是界桩点","D. 界桩点一定是边界点"],"a":["A"],"e":"界桩点与边界点并非完全等同。根据界线地形和设桩方式，界桩点可以与边界点重合，也可能因双立桩等原因位于边界线附近。"},{"t":"s","topic":"行政区域界线测绘","q":"制作边界地形图，最小比例尺应该是（ ）。","o":["A. 1:5000","B. 1:1万","C. 1:5万","D. 1:10万"],"a":["D"],"e":"边界地形图可采用1:1万、1:5万、1:10万等比例尺；题目问最小比例尺，即分母最大的1:10万。"},{"t":"s","topic":"行政区域界线测绘","q":"界桩点至方位物距离测量取位至（ ）m。","o":["A. 0.001","B. 0.01","C. 0.1","D. 1"],"a":["C"],"e":"界桩点至方位物距离记录按本题规范要求取位至0.1m。"},{"t":"s","topic":"测绘航空摄影","q":"垂直航空摄影中像片倾斜角一般不大于（ ）。","o":["A. 3°","B. 1°","C. 1.5°","D. 2°"],"a":["A"],"e":"常规垂直航空摄影要求像片倾斜角控制在较小范围，本题参考限值为不大于3°。"},{"t":"s","topic":"测绘航空摄影","q":"IMU/GPS航摄无法同步获取（ ）。","o":["A. 摄站坐标","B. 影像姿态","C. 像片外方位元素","D. 像控点坐标"],"a":["D"],"e":"IMU/GPS可同步获取摄影瞬间的位置和姿态，用于直接得到或辅助确定外方位元素；像控点坐标需通过地面控制测量等方式获得。"},{"t":"s","topic":"测绘航空摄影","q":"像点位移计算公式中 GSD 表示（ ）。","o":["A. 地面分辨率","B. 飞行速度","C. 曝光时间","D. 航高"],"a":["A"],"e":"GSD（Ground Sample Distance）表示地面采样距离，即像元对应的地面尺寸，通常用于描述地面分辨率。"},{"t":"s","topic":"摄影测量与遥感","q":"外方位线元素的坐标系是（ ）。","o":["A. 像平面坐标系","B. 框标坐标系","C. 地面空间坐标系","D. 像空间坐标系"],"a":["C"],"e":"外方位线元素Xs、Ys、Zs表示摄影中心在地面空间坐标系中的位置。"},{"t":"s","topic":"摄影测量与遥感","q":"单张像片空间后方交会可以得到（ ）。","o":["A. 内方位元素","B. 像控点坐标","C. 像片外方位元素","D. 地面点坐标"],"a":["C"],"e":"空间后方交会利用已知地面控制点与像点坐标反求摄影站位置和姿态，即像片外方位元素。"},{"t":"s","topic":"摄影测量与遥感","q":"下列哪种卫星具有同轨立体成像能力（ ）。","o":["A. 北斗卫星","B. 高分七号","C. 吉林一号","D. 高分一号"],"a":["B"],"e":"高分七号配置前视、后视立体相机，具备高精度同轨立体测绘能力。"},{"t":"s","topic":"摄影测量与遥感","q":"1:2000航摄测图中，像控点高程中误差不应超过基本等高距的（ ）。","o":["A. 1/5","B. 1/20","C. 1/15","D. 1/10"],"a":["D"],"e":"按本题规范型考查口径，1:2000航测成图像控点高程中误差限值为基本等高距的1/10。"},{"t":"s","topic":"摄影测量与遥感","q":"下列属于间接解译标志的是（ ）。","o":["A. 高楼阴影","B. 足球场大小","C. 码头纹理","D. 飞机与机场跑道间的位置关系"],"a":["D"],"e":"间接解译标志依赖地物之间的相关关系或环境联系。飞机与机场跑道之间的空间关系属于典型间接标志；形状、大小、阴影、纹理等多为直接标志。"},{"t":"s","topic":"摄影测量与遥感","q":"1:2000 DEM格网的尺寸应不大于（ ）mm。","o":["A. 0.5","B. 1","C. 2","D. 2.5"],"a":["C"],"e":"按原题表述和参考口径，1:2000 DEM格网尺寸对应选项2。原题单位写作“mm”，本页保留原题表述。"},{"t":"s","topic":"摄影测量与遥感","q":"1:2000的DEM中，静止水域范围内的高程值取（ ）。","o":["A. 常水位高程","B. 赋值-9999","C. 赋值0","D. 摄区内高程平均值"],"a":["A"],"e":"静止水域在DEM中通常按统一水面处理，采用其常水位高程赋值。"},{"t":"s","topic":"摄影测量与遥感","q":"古建筑精细建模可采用的方法是（ ）。","o":["A. GNSS测量","B. 无人机贴近摄影测量","C. 遥感","D. 大飞机LiDAR"],"a":["B"],"e":"古建筑细部复杂，需要近距离、高重叠、多角度影像。无人机贴近摄影测量适合获取高分辨率立面和细节信息。"},{"t":"s","topic":"摄影测量与遥感","q":"点云数据常用格式是（ ）。","o":["A. TIFF","B. LAS","C. BMP","D. OSGB"],"a":["B"],"e":"LAS是激光雷达及点云数据常用交换格式；TIFF/BMP是栅格影像格式，OSGB常用于三维模型瓦片或场景数据。"},{"t":"s","topic":"地图制图","q":"1:5万地形图可以划分为多少幅1:2000地形图（ ）。","o":["A. 576","B. 256","C. 128","D. 1296"],"a":["A"],"e":"按地形图分幅关系，1:5万图幅可划分为24×24=576幅1:2000地形图。"},{"t":"s","topic":"GIS","q":"地理信息系统分为专业应用地理信息系统、专项应用地理信息系统和（ ）。","o":["A. 基础地理信息系统","B. 区域地理信息系统","C. 统计分析地理信息系统","D. 地理信息系统工具"],"a":["A"],"e":"按应用范围和服务对象分类，可包括基础地理信息系统、专业应用地理信息系统和专项应用地理信息系统等。"},{"t":"s","topic":"GIS","q":"不属于空间拓扑关系描述的是（ ）。","o":["A. 对象1在对象2外","B. 对象1与对象2相交","C. 对象1与对象2相距1km","D. 对象1在对象2内"],"a":["C"],"e":"内、外、相交等属于拓扑关系；“相距1km”是度量距离关系，不属于拓扑关系。"},{"t":"s","topic":"GIS","q":"提高栅格数据精度可以采用的方法是（ ）。","o":["A. 增大栅格单元尺寸","B. 减少栅格单元尺寸","C. 改变栅格结构","D. 压缩栅格数据"],"a":["B"],"e":"减小栅格单元尺寸可提高空间分辨率，使边界和细节表达更精细。"},{"t":"s","topic":"GIS","q":"统计某行政区域内土地分类采用哪种空间分析方法（ ）。","o":["A. 叠置分析","B. 缓冲区分析","C. 路径分析","D. 地形分析"],"a":["A"],"e":"将行政区面与土地分类图层进行叠置，可统计行政区范围内各类土地的面积和分布。"},{"t":"s","topic":"GIS","q":"在GIS系统中，筛选出产业园区内的储备地块可采用叠置分析中的（ ）方法。","o":["A. Identity（识别）","B. Union（联合）","C. Erase（擦除）","D. Update（更新）"],"a":["A"],"e":"Identity可保留输入要素并叠加识别要素属性，用于确定储备地块与产业园区范围的空间归属关系。"},{"t":"s","topic":"GIS","q":"E-R图中，方框和菱形分别表示（ ）。","o":["A. 实体、属性","B. 属性、实体","C. 联系、实体","D. 实体、联系"],"a":["D"],"e":"E-R图中矩形/方框表示实体，菱形表示实体之间的联系，椭圆通常表示属性。"},{"t":"s","topic":"导航电子地图","q":"导航电子地图的基本功能不包含（ ）。","o":["A. 路径规划","B. 语音播报","C. 地图编辑","D. 地图更新"],"a":["C"],"e":"导航电子地图面向导航应用，路径规划、导航提示和更新属于常见功能；地图编辑属于生产维护工具能力，不是面向用户的基本导航功能。"},{"t":"s","topic":"GIS","q":"模拟发布时的用户使用环境的测试称为（ ）。","o":["A. 安全测试","B. Alpha测试","C. Beta测试","D. 白盒测试"],"a":["C"],"e":"Beta测试通常在接近真实用户使用环境下进行，由外部用户或目标用户参与，以发现正式发布前的问题。"},{"t":"s","topic":"大地测量","q":"用于三四等水准测量的水准仪在作业前的检验项目不包括（ ）。","o":["A. 水准仪的检视","B. 十字丝的检校","C. i角的检校","D. 概略水准器的检校"],"a":["B"],"e":"本题考查三、四等水准仪作业前检验项目。按参考口径，水准仪检视、i角和概略水准器检校属于作业前检查，十字丝检校不列入本题要求。"},{"t":"s","topic":"工程测量","q":"视准轴误差检测，角度α是视准轴误差的（ ）倍。","o":["A. 2","B. 3","C. 4","D. 5"],"a":["A"],"e":"盘左、盘右观测时，视准轴误差在两方向读数中呈相反影响，因此由两位置读数形成的角度差通常为视准轴误差的2倍。"},{"t":"s","topic":"工程测量","q":"关于导线测量时，水平角重测的说法中，正确的是（ ）。","o":["A. 一测回内2C互差超限，应重测本测回","B. 归零差超限时，应重测该测回","C. 零方向的2C互差超限时，应重测该测回","D. 若一测回中重测方向数超过总方向数的1/5时，应重测该测回"],"a":["B"],"e":"归零差反映一测回开始和结束零方向的闭合情况，归零差超限时应重测该测回。"},{"t":"s","topic":"工程测量","q":"下面（ ）不属于结构安装测量。","o":["A. 标高竖向传递","B. 横距测量","C. 高度测量","D. ±0测量"],"a":["B"],"e":"结构安装测量主要围绕构件轴线、标高、高度及竖向传递等控制；横距测量不是本题所列的典型结构安装测量内容。"},{"t":"s","topic":"工程测量","q":"管线测量成果中，属于A类质量错漏的是（ ）。","o":["A. 隐蔽管线点开挖平面位置、埋深粗差率超5%以上","B. 管线点测量平面中误差超限","C. 管线图上，主干管线走向失真","D. 管线点测量平面误差超过2倍中误差2处"],"a":["A"],"e":"隐蔽管线点开挖检查的平面位置、埋深粗差率严重超限，属于影响成果可靠性的重大质量问题，按本题口径列为A类错漏。"},{"t":"s","topic":"工程测量","q":"隧道测量中，洞外高程控制测量中误差±25.0mm，洞内高程测量中误差±25.0mm，则高程单向贯通误差限差（ ）mm。","o":["A. 35","B. 50","C. 70","D. 100"],"a":["A"],"e":"独立误差合成：m=√(25²+25²)=35.36mm，按选项取约35mm。"},{"t":"s","topic":"海洋测绘","q":"海底测量中，测深线方向布设不需考虑的是（ ）。","o":["A. 有利于完整显示海底地貌","B. 有利于发现障碍物","C. 有利于布设观测深线","D. 有利于减少航行时间"],"a":["D"],"e":"测深线方向首先服务于海底地貌表达、障碍物发现和测深控制等测绘质量要求，单纯减少航行时间不是决定方向的主要技术原则。"},{"t":"s","topic":"地籍测绘","q":"日常地籍调查中，一般不做的是（ ）。","o":["A. 权属变更","B. 面积变更","C. 新增界址点","D. 地籍平面控制网加密"],"a":["D"],"e":"日常地籍调查主要处理宗地权属、界址、面积等变化；控制网加密属于测量控制基础建设，不是一般日常变更调查的常规内容。"},{"t":"s","topic":"测绘航空摄影","q":"下列属于测绘航空摄影工作质量检查内容的是（ ）。","o":["A. 空三接边精度检查","B. 相片控制点精度检查","C. 飞行质量检查","D. 刺点检查"],"a":["C"],"e":"测绘航空摄影成果质量检查重点包括飞行质量和摄影质量等；空三、像控点和刺点属于后续摄影测量环节。"},{"t":"s","topic":"测绘航空摄影","q":"下列航摄仪检定项目精度要求错误的是（ ）。","o":["A. 检定主距精度优于0.01mm","B. 框标坐标精度优于0.01mm","C. 径向畸变差精度优于0.01mm","D. 自准直主点坐标优于0.01mm"],"a":["A"],"e":"该题对“优于0.01mm”的表述与不同航摄仪检定规范、具体项目限值之间存在口径歧义，因此本页按争议题处理：只要作答即得满分。","disputed":true},{"t":"s","topic":"测绘航空摄影","q":"多镜头倾斜摄影测量与常规单镜头摄影测量的最大差异是（ ）。","o":["A. 旋偏角","B. 分区","C. 像点位移","D. 像片重叠度"],"a":["A"],"e":"多镜头倾斜摄影由不同方向的镜头同时成像，各镜头相对垂直摄影存在明显姿态差异，旋偏/姿态组织是其区别于常规单镜头摄影的重要特征。"},{"t":"s","topic":"摄影测量与遥感","q":"成果评定当中，出现哪一项成果评定不合格（ ）。","o":["A. 国界、界桩、界碑及注记错漏","B. 一般独立地物漏绘2处","C. 不标准汉字注记","D. 1条边未接边"],"a":["A"],"e":"国界、界桩、界碑等属于极重要的政治性和法定界线内容，出现错漏属于严重质量问题，可直接导致成果不合格。"},{"t":"s","topic":"摄影测量与遥感","q":"下列哪一项不属于像片控制测量的工作内容（ ）。","o":["A. 像控点测量","B. ［原题资料未显示］","C. ［原题资料未显示］","D. 像片判读"],"a":["D"],"e":"原题资料中的B、C两个选项未显示，本页不补造缺失文字。为避免缺失选项影响成绩，本题按争议题处理：只要作答即得满分。","disputed":true},{"t":"s","topic":"摄影测量与遥感","q":"微波遥感的成像方式是（ ）。","o":["A. 斜距投影","B. 中心投影","C. 平行投影","D. 全景投影"],"a":["A"],"e":"侧视雷达等微波遥感系统按雷达到目标的斜距记录回波，属于斜距投影成像。"},{"t":"s","topic":"摄影测量与遥感","q":"遥感影像配准的本质是（ ）。","o":["A. 同名点匹配","B. 影像格式转换","C. 影像纠正","D. 轨道参数提取"],"a":["A"],"e":"影像配准首先要建立不同影像之间的同名点/同名特征对应关系，再据此求变换模型实现几何对齐。"},{"t":"s","topic":"实景三维","q":"建（构）筑物一级模型进退结构大于（ ）m的应进行建模表现。","o":["A. 0.1","B. 0.2","C. 0.3","D. 0.4"],"a":["B"],"e":"按实景三维相关技术要求，本题考查一级建（构）筑物模型细节表达阈值，进退结构大于0.2m应建模表现。"},{"t":"s","topic":"GIS","q":"构建R树空间索引，一般用空间对象的（ ）作为索引对象。","o":["A. 最小外包矩形","B. 中心点","C. 质心点","D. 最小外包圆形"],"a":["A"],"e":"R树以空间对象的最小外包矩形（MBR）组织层次索引，从而快速排除不相交对象。"},{"t":"s","topic":"GIS","q":"GIS系统中，与空间对象关联的非空间数据称为（ ）。","o":["A. 统计数据","B. 辅助数据","C. 属性数据","D. 特征数据"],"a":["C"],"e":"描述空间对象名称、类型、人口、面积等非几何信息的数据称为属性数据。"},{"t":"s","topic":"互联网地理信息服务","q":"WMTS根据瓦片的（ ）请求数据。","o":["A. 左下角坐标","B. 右下角坐标","C. 中心点坐标","D. 行列号"],"a":["D"],"e":"WMTS采用瓦片矩阵体系，通过层级、行号和列号等索引请求对应瓦片。"},{"t":"s","topic":"GIS","q":"GIS功能分析中，先满足顾客的核心需求，再根据反馈进行完善，属于（ ）方法。","o":["A. 瀑布模型","B. 演化模型","C. 喷泉模型","D. V型"],"a":["B"],"e":"演化模型先形成可运行版本满足核心需求，再根据用户反馈持续迭代和完善。"},{"t":"s","topic":"GIS","q":"同一GIS要素数据集中，所有元素必须具备相同的（ ）。","o":["A. 元数据","B. 数据模型","C. 空间参考","D. 数据源"],"a":["C"],"e":"同一要素数据集中的要素需要在统一空间参考下组织，才能保证空间位置和拓扑关系的一致性。"},{"t":"s","topic":"地图制图","q":"专题地图表示方法（ ）。","o":["A. 分区统计图表法","B. 定位图表法","C. 分级统计图表法","D. ［原题资料未显示］"],"a":["A"],"e":"原题资料中的D选项未显示，无法完整恢复题目备选项。本页不补造缺失文字，并将本题按争议题处理：只要作答即得满分。","disputed":true},{"t":"s","topic":"地图制图","q":"地图注记最常用的布置方式是（ ）。","o":["A. 垂直字列","B. 屈曲字列","C. 雁行字列","D. 水平字列"],"a":["D"],"e":"一般地图注记以水平字列最常用；沿线状地物可采用屈曲字列等特殊布置方式。"},{"t":"s","topic":"导航电子地图","q":"下列关于导航电子地图增量更新的说法中，（ ）是错误的。","o":["A. ［原题资料未显示］","B. ［原题资料未显示］","C. 不支持单独要素更新","D. ［原题资料未显示］"],"a":["C"],"e":"原题资料中的A、B、D选项未显示。本页不补造缺失文字；可见的C项“不支持单独要素更新”通常不符合增量更新思想，但因备选项不完整，本题按争议题处理，作答即得满分。","disputed":true},{"t":"s","topic":"互联网地理信息服务","q":"独立应用间调用（ ）。","o":["A. ［原题资料未显示］","B. ［原题资料未显示］","C. ［原题资料未显示］","D. API接口调用"],"a":["D"],"e":"原题资料中的A、B、C选项未显示。本页不补造缺失文字；可见D项为API接口调用。由于备选项不完整，本题按争议题处理，作答即得满分。","disputed":true},{"t":"s","topic":"互联网地理信息服务","q":"电子地图缓存的作用是（ ）。","o":["A. 提升数据显示速率","B. 提升数据存储速率","C. 提升数据存储效率","D. 提升数据网络传输速率"],"a":["A"],"e":"地图缓存通过预生成或复用已经处理的数据，减少实时计算和数据库访问，从而提高地图显示与响应速度。"},{"t":"s","topic":"互联网地理信息服务","q":"哪一项不属于互联网地图服务质量评定的内容（ ）。","o":["A. 查询检索服务","B. 地理位置展示服务","C. 专项服务","D. 运行环境"],"a":["D"],"e":"互联网地图服务质量主要评价提供给用户的服务内容及其质量，运行环境属于系统运行条件，不是本题所列的服务质量评定内容。"},{"t":"s","topic":"互联网地理信息服务","q":"天地图影像调用服务类型（ ）。","o":["A. WMTS","B. WCS","C. WFS","D. WPS"],"a":["A"],"e":"天地图影像底图通常以瓦片方式提供，WMTS是常见的标准瓦片地图服务接口。"},{"t":"m","topic":"大地测量","q":"国家平面大地控制网建立的原则是（ ）。","o":["A. 分级布网、逐级控制","B. 具有足够精密","C. 具有一定密度","D. 统一的技术规格要求","E. 网形可任意调节"],"a":["A","B","C","D"],"e":"国家平面大地控制网强调统一技术标准、必要精度与密度，并按等级进行控制；网形不能任意调整。"},{"t":"m","topic":"大地测量","q":"下列关于i角检校的说法中正确的是（ ）。","o":["A. 自动安平光学水准仪作业开始后7个工作日内，每天校验一次i角","B. 气泡式水准仪作业开始后7个工作日内，每天上下午各检校一次i角","C. 自动安平水准仪作业期间每7天检校一次i角","D. 气泡式水准仪作业期间每15天检校一次i角","E. 数字水准仪应每天开测前进行i角检校"],"a":["A","B","E"],"e":"水准仪i角需按仪器类型和作业阶段定期检校。按本题规范口径，A、B、E符合要求；C、D所述固定周期不符合该题要求。"},{"t":"m","topic":"工程测量","q":"变形监测网由（ ）组成。","o":["A. 基准点","B. 后视点","C. 变形观测点","D. 工作基点","E. 转点"],"a":["A","C","D"],"e":"变形监测网的基本点类包括基准点、工作基点和变形观测点。后视点、转点属于具体测量过程中的观测辅助点。"},{"t":"m","topic":"工程测量","q":"基坑监测的内容包括（ ）。","o":["A. 支护边坡沉降","B. 基坑回弹","C. 基坑沉降","D. 基坑倾斜","E. 深层水平位移"],"a":["A","B","E"],"e":"基坑工程监测常包括支护结构/边坡顶部沉降、基坑回弹、深层水平位移等。题目中的“基坑沉降”“基坑倾斜”不是本题规范分类下的标准监测项目。"},{"t":"m","topic":"工程测量","q":"变形监测技术设计的内容包括（ ）。","o":["A. 监测目的","B. 监测方法","C. 精度等级","D. 监测数据处理方法","E. 变形结果分析"],"a":["A","B","C","D","E"],"e":"变形监测技术设计应形成完整方案，包括目的、方法、精度、数据处理和成果/变形分析等内容。"},{"t":"m","topic":"工程测量","q":"可用于竖井联系测量的方法有（ ）。","o":["A. 光学投点法","B. 激光准直投点法","C. 陀螺仪定向法","D. 引张线法","E. 联系三角形法"],"a":["A","B","C","E"],"e":"竖井平面联系测量可采用光学投点、激光准直、陀螺定向和联系三角形等方法；引张线法不属于本题常用竖井联系测量方法。"},{"t":"m","topic":"房产测绘","q":"房产区的划分可依据（ ）。","o":["A. 市","B. 县","C. 街道","D. 乡镇","E. 按房地产管理划分的区域"],"a":["C","D","E"],"e":"房产区可按街道、乡镇等行政管辖范围划分，也可结合房地产管理区域划分；市、县通常属于更高一级范围。"},{"t":"m","topic":"地籍测绘","q":"宗地草图记录的内容包括（ ）。","o":["A. 界址点类型","B. 宗地界址点号","C. 界址边长","D. 相邻宗地关系","E. 宗地坐落"],"a":["B","C","D","E"],"e":"宗地草图主要记录宗地界址点号、界址边长、相邻宗地关系、宗地坐落及必要地物等；“界址点类型”不是本题要求的主要记录项。"},{"t":"m","topic":"行政区域界线测绘","q":"关于边界协议书附图比例尺的说法正确的是（ ）。","o":["A. 省级行政区可选用1:5万","B. 省级以下行政区可选用1:1万","C. 地形地物稀少地区可适当放大比例尺","D. 同条边界应采用相同比例尺","E. 同地区应与勘界工作用图一致"],"a":["A","B","D","E"],"e":"边界协议书附图比例尺应与行政层级、勘界工作用图和边界表达需要相适应；同条边界应尽量统一比例尺。地形地物稀少地区不是“适当放大比例尺”的一般规定。"},{"t":"m","topic":"摄影测量与遥感","q":"生产DEM可采用的数据源包括（ ）。","o":["A. DLG","B. DOM","C. DSM","D. 图斑数据","E. 激光点云数据"],"a":["A","C","E"],"e":"DEM可由具有高程信息的数据生成，例如含高程的DLG、DSM经地物处理以及激光点云。普通DOM和图斑数据不能直接提供完整地形高程。"},{"t":"m","topic":"实景三维","q":"以下作业方法中，常用来制作城市三维模型的有（ ）。","o":["A. GNSS测量","B. 卫星遥感","C. DSM方法","D. 倾斜摄影","E. 激光扫描"],"a":["C","D","E"],"e":"城市三维模型常利用DSM/表面模型、倾斜摄影和激光扫描等获取三维几何信息；GNSS单点测量和普通卫星遥感不是本题所指的主要城市三维建模方法。"},{"t":"m","topic":"大地测量","q":"相对独立的平面坐标系转换到2000国家大地坐标系可用的转换模型是（ ）。","o":["A. 二维四参数模型","B. 二维七参数模型","C. 三维七参数模型","D. 布尔沙模型","E. 多项式拟合模型"],"a":["A","E"],"e":"相对独立的平面坐标系向CGCS2000转换，常采用平面四参数模型；区域存在较复杂系统变形时可采用多项式拟合。三维七参数/Bursa模型主要用于三维空间直角坐标转换。"},{"t":"m","topic":"工程测量","q":"建筑方格网的测设方法有（ ）。","o":["A. 极坐标法","B. 布网法","C. RTK法","D. 轴线法","E. 交会法"],"a":["B","D"],"e":"建筑方格网常采用布网法或轴线法进行测设，建立规则的施工平面控制体系。"},{"t":"m","topic":"海洋测绘","q":"海洋工程地形测量中，深度改正包括（ ）。","o":["A. 吃水改正","B. 水位改正","C. 声速改正","D. 动态吃水改正","E. ［原题资料未显示］"],"a":["B","C","D"],"e":"原题资料中的E选项未显示，本页不补造缺失文字。水位、声速和动态吃水等是测深成果处理中常见改正项；因备选项不完整，本题按争议题处理，作答即得满分。","disputed":true},{"t":"m","topic":"摄影测量与遥感","q":"DEM成果质量检查的内容包括（ ）。","o":["A. 平面精度","B. 高程精度","C. 格网尺寸","D. 属性精度","E. 时间精度"],"a":["A","B","C","E"],"e":"DEM质量检查主要涉及空间参考和位置精度、高程精度、格网参数以及现势性/时间精度等；“属性精度”不是DEM的典型核心质量项。"},{"t":"m","topic":"测绘航空摄影","q":"下列功能中，属于航摄仪滤光片作用的有（ ）。","o":["A. 使地物反差更大","B. 减弱或者消除某一波谱作用","C. 曝光补偿","D. 降低镜头畸变差","E. 均匀补偿焦平面照度"],"a":["A","B","E"],"e":"滤光片可选择性透过/抑制特定波段，改善地物反差；某些滤光设计还可补偿像场照度不均。它不能用于降低镜头几何畸变。"},{"t":"m","topic":"实景三维","q":"实景三维中基础地理实体类别分为（ ）。","o":["A. 空间地理实体","B. 自然地理实体","C. 人工地理实体","D. 规划地理实体","E. 管理地理实体"],"a":["B","C","E"],"e":"实景三维基础地理实体按相关技术体系分为自然地理实体、人工地理实体和管理地理实体。"},{"t":"m","topic":"GIS","q":"关于GIS分布式信息系统特征的说法中，正确的是（ ）。","o":["A. 便于分散管理","B. 集中管理，计算资源便于扩展","C. 资源或数据库分布广","D. 便于低价资源集成高性能系统","E. 容易实现高可用性"],"a":["A","C","D","E"],"e":"分布式GIS的资源、数据和计算节点可分散部署，便于分布管理与扩展，可通过多节点提高性能和可用性；“集中管理”不是其突出特征。"},{"t":"m","topic":"地图制图","q":"以下关于正轴等角双标准纬线割圆锥投影的描述中，错误的有（ ）。","o":["A. 微分圆形状不变","B. 同纬线上不同经度微分圆变形相等","C. 两条纬线中间经线变形处处相等","D. 两标准纬线间为正向变形","E. 微分圆面积不变"],"a":["C","D","E"],"e":"等角投影保持微小图形角度和形状，因此A正确；同纬线各经度尺度相同，B正确。两标准纬线间尺度并非处处相同，且通常为负向长度变形；等角投影也不保持面积，因此C、D、E为错误表述。"},{"t":"m","topic":"互联网地理信息服务","q":"网络地理信息服务的运行维护包括（ ）等内容。","o":["A. 数据维护","B. 功能升级改善","C. 用户管理","D. 需求开发","E. 性能升级"],"a":["A","B","C","E"],"e":"运行维护包括数据更新维护、用户与权限管理、功能改进以及性能优化等；需求开发属于新增需求分析与开发工作，不是常规运行维护内容。"}];
+const totalPages=Math.ceil(qs.length/pageSize);
+let currentPage=0;
+let submitted=false;
+
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function ans(i){return [...document.querySelectorAll(`input[name="q${i}"]:checked`)].map(e=>e.value).sort()}
+function savedAnswers(){
+  const out=[];
+  for(let i=0;i<qs.length;i++){
+    const els=[...document.querySelectorAll(`input[name="q${i}"]:checked`)];
+    out.push(els.map(e=>e.value).sort());
+  }
+  return out;
+}
+function same(a,b){return a.length===b.length&&a.every((v,i)=>v===b[i])}
+function stateData(){
+  let prev=null;try{prev=JSON.parse(localStorage.getItem(quizId)||'null')}catch(e){}
+  const base=prev&&Array.isArray(prev.answers)?prev.answers:Array(qs.length).fill(null).map(()=>[]);
+  const guesses=prev&&Array.isArray(prev.guesses)?prev.guesses:Array(qs.length).fill(false);
+  document.querySelectorAll('.q').forEach(sec=>{
+    const i=Number(sec.dataset.index);
+    base[i]=ans(i);
+    const g=document.querySelector(`[data-g="${i}"]`);
+    if(g)guesses[i]=g.checked;
+  });
+  return {answers:base,guesses,currentPage,submitted};
+}
+function save(){
+  try{localStorage.setItem(quizId,JSON.stringify(stateData()))}catch(e){}
+  updateProgress();renderNav();
+}
+function loadState(){
+  try{
+    const s=JSON.parse(localStorage.getItem(quizId)||'null');
+    if(!s)return null;
+    currentPage=Math.max(0,Math.min(totalPages-1,Number(s.currentPage)||0));
+    submitted=!!s.submitted;
+    return s;
+  }catch(e){return null}
+}
+let loadedState=loadState();
+
+function getStoredAnswer(i){
+  if(loadedState&&Array.isArray(loadedState.answers))return loadedState.answers[i]||[];
+  try{const s=JSON.parse(localStorage.getItem(quizId)||'null');return s?.answers?.[i]||[]}catch(e){return []}
+}
+function getStoredGuess(i){
+  if(loadedState&&Array.isArray(loadedState.guesses))return !!loadedState.guesses[i];
+  try{const s=JSON.parse(localStorage.getItem(quizId)||'null');return !!s?.guesses?.[i]}catch(e){return false}
+}
+
+function renderPage(){
+  const start=currentPage*pageSize,end=Math.min(start+pageSize,qs.length);
+  let h='';
+  if(start===0)h+='<div class="section">一、单项选择题（1—80，每题1分）</div>';
+  if(start===80)h+='<div class="section">二、多项选择题（81—100，每题2分；错选0分，少选每个正确选项0.5分）</div>';
+  for(let i=start;i<end;i++){
+    const x=qs[i],stored=getStoredAnswer(i),guess=getStoredGuess(i);
+    h+=`<section class="q ${guess?'unsure':''} ${x.disputed?'disputed':''}" id="q${i}" data-index="${i}">
+      <div class="qh"><span class="badge">${x.t==='s'?'单选':'多选'}</span><span class="topic">${esc(x.topic)}</span>${x.disputed?'<span class="dispute">争议题</span>':''}<div class="qt">${i+1}. ${esc(x.q)}</div></div>
+      ${x.o.map(v=>{const val=v[0],checked=stored.includes(val);return `<label class="opt ${checked?'checked':''}"><input ${submitted?'disabled':''} type="${x.t==='s'?'radio':'checkbox'}" name="q${i}" value="${val}" ${checked?'checked':''} onchange="changed(${i})">${esc(v)}</label>`}).join('')}
+      <label class="guess"><input ${submitted?'disabled':''} type="checkbox" data-g="${i}" ${guess?'checked':''} onchange="guessChanged(${i},this.checked)">这题我不确定 / 是蒙的</label>
+      <div id="fb${i}" class="fb"></div>
+    </section>`;
+  }
+  document.getElementById('quiz').innerHTML=h;
+  document.getElementById('pageInfo').textContent=`第 ${currentPage+1} / ${totalPages} 页`;
+  document.getElementById('rangeInfo').textContent=`${start+1}—${end}题`;
+  document.getElementById('pagePill').textContent=`第 ${currentPage+1} / ${totalPages} 页`;
+  document.getElementById('prevBtn').disabled=currentPage===0;
+  document.getElementById('nextBtn').disabled=currentPage===totalPages-1;
+  document.getElementById('submitBtn').disabled=submitted;
+  document.getElementById('lockNote').classList.toggle('show',submitted);
+  if(submitted)showFeedbackForPage();
+  updateProgress();renderNav();
+  loadedState=null;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function changed(i){
+  document.querySelectorAll(`input[name="q${i}"]`).forEach(e=>e.closest('.opt').classList.toggle('checked',e.checked));
+  save();
+}
+function guessChanged(i,v){document.getElementById(`q${i}`).classList.toggle('unsure',v);save()}
+
+function allState(){
+  const s=stateData();
+  return s;
+}
+function calc(){
+  const s=allState();
+  let score=0,exact=0,solid=0,guessed=0,guessedCorrect=0,unanswered=0;
+  const d=qs.map((q,i)=>{
+    const a=(s.answers[i]||[]).slice().sort(),c=[...q.a].sort(),g=!!s.guesses[i],answered=a.length>0;
+    if(!answered)unanswered++;
+    let ok=same(a,c),pts=0,disputedAnswered=!!q.disputed&&answered;
+    if(disputedAnswered){pts=q.t==='s'?1:2;ok=true}
+    else if(q.t==='s')pts=ok?1:0;
+    else{
+      const wrong=a.some(x=>!c.includes(x));
+      if(wrong)pts=0;else if(ok)pts=2;else pts=a.length*.5;
+    }
+    score+=pts;if(ok&&answered)exact++;if(g)guessed++;if(g&&ok&&answered)guessedCorrect++;if(ok&&answered&&!g)solid++;
+    return {i:i+1,a:a.join('')||'-',c:c.join(''),g,answered,ok,pts,topic:q.topic,disputed:!!q.disputed,disputedAnswered};
+  });
+  return {score,exact,solid,guessed,guessedCorrect,unanswered,d};
+}
+function feedbackHTML(q,d){
+  let cls='bad',label='✗ 错误';
+  if(!d.answered){cls='bad';label='✗ 未作答'}
+  else if(d.disputedAnswered){cls='disp';label='◇ 争议题（已作答，按满分计）'}
+  else if(d.g&&d.ok){cls='warn';label='△ 不确定/蒙对，仍建议复盘'}
+  else if(d.ok){cls='ok';label='✓ 正确'}
+  else if(d.pts>0){cls='warn';label='△ 少选，获得部分分'}
+  return {cls,html:`${label}（${d.pts.toFixed(1)}分）<br>你的答案：${esc(d.a)}　参考答案：${esc(d.c)}<br><strong>解析：</strong>${esc(q.e)}`};
+}
+function showFeedbackForPage(){
+  const r=calc(),start=currentPage*pageSize,end=Math.min(start+pageSize,qs.length);
+  for(let i=start;i<end;i++){
+    const f=document.getElementById(`fb${i}`),obj=feedbackHTML(qs[i],r.d[i]);
+    if(f){f.className=`fb show ${obj.cls}`;f.innerHTML=obj.html}
+  }
+}
+function submitQuiz(){
+  const s=allState();
+  const answered=s.answers.filter(a=>a&&a.length).length;
+  if(answered<100){
+    const ok=confirm(`当前还有 ${100-answered} 题未作答。确定现在提交吗？提交后答案将锁定。`);
+    if(!ok)return;
+  }else{
+    if(!confirm('确定提交整套试卷吗？提交后答案将锁定，并显示全部题目解析。'))return;
+  }
+  submitted=true;
+  try{localStorage.setItem(quizId,JSON.stringify({...s,submitted:true,currentPage}))}catch(e){}
+  renderPage();
+  showResult();
+}
+function showResult(){
+  const r=calc();
+  const wrong=r.d.filter(x=>x.answered&&!x.ok&&!x.disputedAnswered);
+  const need=r.d.filter(x=>!x.ok||x.g).map(x=>x.i);
+  const res=document.getElementById('result');
+  res.className='result show';
+  res.innerHTML=`<div class="score">${r.score.toFixed(1)} / 120</div>
+  <div class="result-tip">已开启全部100题解析。使用“上一页 / 下一页”或右下角“☷”题号导航逐题查看。</div>
+  <div class="metrics">
+   <div class="metric"><strong>${r.exact}</strong>完整答对/争议已答</div>
+   <div class="metric"><strong>${r.solid}</strong>确定答对</div>
+   <div class="metric"><strong>${r.guessed}</strong>不确定/蒙</div>
+   <div class="metric"><strong>${wrong.length}</strong>错题/少选</div>
+   <div class="metric"><strong>${r.unanswered}</strong>未作答</div>
+  </div>
+  <div class="review">重点复习题号：${need.length?need.join('、'):'无'}<br>说明：本页按参考答案判分；争议题按“作答即得满分”处理。</div>`;
+}
+function goPage(p){
+  const live=stateData();
+  currentPage=Math.max(0,Math.min(totalPages-1,p));
+  try{localStorage.setItem(quizId,JSON.stringify({...live,currentPage,submitted}))}catch(e){}
+  loadedState={...live,currentPage,submitted};
+  renderPage();
+}
+function prevPage(){if(currentPage>0)goPage(currentPage-1)}
+function nextPage(){if(currentPage<totalPages-1)goPage(currentPage+1)}
+function goQuestion(n){
+  closeNav();const p=Math.floor((n-1)/pageSize);
+  const live=stateData();currentPage=p;
+  try{localStorage.setItem(quizId,JSON.stringify({...live,currentPage,submitted}))}catch(e){}
+  loadedState={...live,currentPage,submitted};renderPage();
+  setTimeout(()=>document.getElementById(`q${n-1}`)?.scrollIntoView({behavior:'smooth',block:'start'}),120);
+}
+function updateProgress(){
+  const s=stateData(),n=s.answers.filter(a=>a&&a.length).length;
+  document.getElementById('pbar').style.width=(n/qs.length*100)+'%';
+  document.getElementById('ptxt').textContent=`已作答 ${n} / ${qs.length}`;
+}
+function renderNav(){
+  const grid=document.getElementById('navGrid');if(!grid)return;
+  const s=stateData(),r=submitted?calc():null;
+  grid.innerHTML=qs.map((q,i)=>{
+    let cls=[];if((s.answers[i]||[]).length)cls.push('answered');if(s.guesses[i])cls.push('unsure');
+    if(Math.floor(i/pageSize)===currentPage)cls.push('current');
+    if(submitted&&r){
+      const d=r.d[i];cls=cls.filter(x=>!['answered','unsure'].includes(x));
+      if(d.disputedAnswered)cls.push('disputed-after');
+      else if(d.ok&&d.answered)cls.push('correct');
+      else if(d.pts>0)cls.push('partial');
+      else cls.push('wrong');
+      if(Math.floor(i/pageSize)===currentPage)cls.push('current');
+    }
+    return `<button class="${cls.join(' ')}" onclick="goQuestion(${i+1})">${i+1}</button>`;
+  }).join('');
+}
+function openNav(){renderNav();document.getElementById('navModal').classList.add('show')}
+function closeNav(){document.getElementById('navModal').classList.remove('show')}
+
+function buildResultText(){
+  const r=calc();
+  let t=`【2023年注册测绘师｜测绘综合能力真题】
+得分：${r.score.toFixed(1)}/120
+完整答对/争议已答：${r.exact}/100
+确定答对：${r.solid}
+不确定/蒙的：${r.guessed}，其中蒙对${r.guessedCorrect}
+未作答：${r.unanswered}
+
+逐题结果：
+`;
+  r.d.forEach(x=>{
+    let st=x.disputedAnswered?'争议题（已作答）':(x.ok&&x.answered?'对':(x.pts>0?'少选':(x.answered?'错':'未作答')));
+    t+=`${x.i}. ${x.a}${x.g?' 【不确定/蒙】':''}｜${st}${x.disputed?'【争议题】':''}｜参考答案 ${x.c}｜${x.topic}
+`;
+  });
+  return t;
+}
+function fallbackCopy(text){
+  const ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.left='-9999px';ta.style.top='0';
+  document.body.appendChild(ta);ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);
+  let ok=false;try{ok=document.execCommand('copy')}catch(e){}document.body.removeChild(ta);
+  if(ok)document.getElementById('msg').textContent='已复制答题结果，可直接粘贴给 ChatGPT。';else showCopy(text);
+}
+function copyResults(){
+  const t=buildResultText();
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(t).then(()=>document.getElementById('msg').textContent='已复制答题结果，可直接粘贴给 ChatGPT。').catch(()=>fallbackCopy(t));
+  }else fallbackCopy(t);
+}
+function showCopy(t){document.getElementById('copyArea').value=t;document.getElementById('copyModal').classList.add('show');setTimeout(()=>{const a=document.getElementById('copyArea');a.focus();a.select()},30)}
+function closeCopy(){document.getElementById('copyModal').classList.remove('show')}
+function resetQuiz(){
+  if(!confirm('确定清空整套2023真题的全部答案、标记和提交状态吗？'))return;
+  try{localStorage.removeItem(quizId)}catch(e){}
+  currentPage=0;submitted=false;loadedState=null;
+  document.getElementById('result').className='result';document.getElementById('result').innerHTML='';
+  document.getElementById('msg').textContent='';renderPage();
+}
+window.addEventListener('keydown',e=>{
+  if(e.target&&['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  if(e.key==='ArrowLeft')prevPage();
+  if(e.key==='ArrowRight')nextPage();
+});
+renderPage();
+if(submitted)showResult();
+</script>
+</body>
+</html>
