@@ -10,13 +10,13 @@ let updateTimer;
 async function updateCatalog() {
   try {
     const result = await generateCatalog();
-    console.log(`题库索引已更新：${result.count} 套真题`);
+    console.log(`题库索引已更新：${result.count} 套试卷`);
   } catch (error) {
     console.error("题库索引更新失败：", error.message);
   }
 }
 
-console.log("开始监听真题目录");
+console.log("开始监听题库目录");
 await updateCatalog();
 console.log("题库监听已就绪");
 
