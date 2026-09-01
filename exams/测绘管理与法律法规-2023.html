@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b10">
+<title>2023年注册测绘师｜测绘管理与法律法规真题</title>
+<style>
+:root{
+  --bg:#070b10;--bg2:#0b121a;--card:#101923;--card2:#0b141d;--line:#263548;
+  --text:#e8eef5;--muted:#9dabb9;--blue:#3b82f6;--blue2:#38bdf8;
+  --green:#4ade80;--yellow:#fbbf24;--red:#fb7185;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{
+  margin:0;min-height:100vh;color:var(--text);line-height:1.68;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  background:radial-gradient(circle at 85% -5%,rgba(37,99,235,.18),transparent 31%),linear-gradient(180deg,var(--bg),var(--bg2));
+}
+button,input,label{touch-action:manipulation}
+.wrap{width:min(1060px,100%);margin:0 auto;padding:24px 18px calc(155px + env(safe-area-inset-bottom))}
+.hero{
+  background:linear-gradient(135deg,rgba(37,99,235,.17),rgba(14,165,233,.04)),#0e1720;
+  border:1px solid #2b3b50;border-radius:18px;padding:24px;margin-bottom:14px;
+  box-shadow:0 14px 34px rgba(0,0,0,.22)
+}
+.hero h1{font-size:27px;margin:0 0 7px;line-height:1.35}
+.hero p{margin:5px 0;color:#c6d2de}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.tag{padding:4px 9px;border-radius:999px;font-size:12px;color:#bfdbfe;background:rgba(59,130,246,.10);border:1px solid rgba(96,165,250,.2)}
+.tag.warn{color:#fde68a;background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.25)}
+.source-note{margin-top:12px;padding:10px 12px;background:#09131d;border:1px solid #2a3a4d;border-radius:10px;color:#b7c5d3;font-size:13px}
+.topbar{
+  position:sticky;top:5px;z-index:40;background:rgba(7,12,18,.94);backdrop-filter:blur(14px);
+  border:1px solid #263649;border-radius:13px;padding:9px 11px;margin-bottom:12px;
+  display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center
+}
+.pbg{height:8px;background:#182536;border-radius:99px;overflow:hidden}
+.pbar{height:100%;width:0;background:linear-gradient(90deg,#2563eb,#38bdf8);transition:.2s}
+.ptxt,.page-status{font-size:12px;color:#b2bfcc;white-space:nowrap}
+.page-status{grid-column:1/-1;display:flex;justify-content:space-between;gap:8px}
+.section{font-size:14px;font-weight:800;color:#c7d5e3;margin:19px 2px 7px}
+.q{
+  border:1px solid var(--line);background:linear-gradient(180deg,var(--card),#0e171f);
+  border-radius:14px;padding:19px;margin:12px 0;box-shadow:0 5px 15px rgba(0,0,0,.13)
+}
+.q.unsure{border-color:rgba(245,158,11,.72)}
+.q.disputed{box-shadow:inset 3px 0 0 #a78bfa}
+.qh{display:flex;align-items:flex-start;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.badge,.topic,.dispute{font-size:12px;font-weight:800;border-radius:999px;padding:2px 8px}
+.badge{color:#93c5fd;background:rgba(59,130,246,.11);border:1px solid rgba(59,130,246,.2)}
+.topic{color:#a7f3d0;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.17)}
+.dispute{color:#ddd6fe;background:rgba(139,92,246,.12);border:1px solid rgba(167,139,250,.28)}
+.qt{font-size:16px;font-weight:760;flex:1;min-width:250px}
+.opt{
+  display:flex;align-items:flex-start;min-height:47px;width:100%;padding:10px 11px;margin:8px 0;
+  border:1px solid var(--line);border-radius:10px;background:var(--card2);cursor:pointer;font-size:15px
+}
+.opt:hover{border-color:#3b82f6;background:#122032}
+.opt.checked{border-color:#3b82f6;background:rgba(37,99,235,.18)}
+.opt input{width:18px;height:18px;flex:none;margin:3px 9px 0 0;accent-color:#3b82f6}
+.guess{
+  display:flex;align-items:center;min-height:45px;margin-top:11px;padding-top:9px;border-top:1px dashed #304052;
+  color:#f5c64d;font-size:14px;cursor:pointer
+}
+.guess input{width:19px;height:19px;margin-right:8px;accent-color:#eaa71b}
+.fb{display:none;margin-top:11px;padding:11px 12px;border-radius:10px;font-size:14px}
+.fb.show.ok{display:block;background:rgba(34,197,94,.10);border:1px solid rgba(74,222,128,.22);color:#a7efbf}
+.fb.show.bad{display:block;background:rgba(244,63,94,.10);border:1px solid rgba(251,113,133,.22);color:#ffb1bd}
+.fb.show.warn{display:block;background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.25);color:#f9d775}
+.fb.show.disp{display:block;background:rgba(139,92,246,.11);border:1px solid rgba(167,139,250,.26);color:#ddd6fe}
+.result{display:none;margin:18px 0;padding:18px;border:1px solid #304159;border-radius:15px;background:linear-gradient(135deg,#111827,#172033)}
+.result.show{display:block}.score{font-size:30px;font-weight:900;color:#a9ccff}.result-tip{font-size:14px;color:#c4d0dc;margin:4px 0 12px}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.metric{border:1px solid #2b3c50;border-radius:10px;background:#0d1620;padding:8px;text-align:center;color:#aebac7;font-size:12px}
+.metric strong{display:block;color:#fff;font-size:18px}
+.review{margin-top:11px;padding:10px 12px;border:1px solid #304159;border-radius:10px;background:#0b141d;color:#bac7d4;font-size:13px}
+.pager{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;
+  margin:16px 0 8px;padding:9px;border:1px solid #29394c;border-radius:13px;background:#0b141d
+}
+.pager button,.page-pill,.actions button,.nav-grid button{min-height:44px;border-radius:9px;border:0;font-weight:800}
+.pager button{background:#1b2938;color:#e9f1f8;padding:9px 13px;cursor:pointer}
+.pager button:disabled{opacity:.35;cursor:not-allowed}
+.page-pill{text-align:center;display:flex;align-items:center;justify-content:center;color:#cbd5e1;padding:0 12px;font-size:13px}
+.actions{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:max(8px,env(safe-area-inset-bottom));
+  z-index:50;width:min(1020px,calc(100% - 20px));display:grid;grid-template-columns:1.2fr 1fr .8fr;
+  gap:7px;padding:9px;background:rgba(7,12,17,.95);backdrop-filter:blur(14px);border:1px solid #263344;border-radius:14px
+}
+.actions button{padding:9px 11px;color:#fff;cursor:pointer;font-size:14px}
+.primary{background:linear-gradient(135deg,#2563eb,#3b82f6)}.copy{background:#0f766e}.secondary{background:#202d3b;border:1px solid #3a4b5e!important}
+.actions button:disabled{opacity:.45;cursor:not-allowed}
+.msg{text-align:center;min-height:20px;font-size:13px;color:#87e5a9}
+.fab-nav{
+  position:fixed;right:14px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:49;
+  width:48px;height:48px;border-radius:50%;border:1px solid #3a4b61;background:#152337;color:#dbeafe;font-weight:900;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);cursor:pointer
+}
+.modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:16px}
+.modal.show{display:flex}.panel{width:min(780px,100%);max-height:88vh;overflow:auto;background:#101a26;border:1px solid #3a5069;border-radius:14px;padding:15px}
+.panel h3{margin:0 0 10px}.panel-note{font-size:13px;color:#aebdcb;margin-bottom:10px}
+.nav-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.nav-grid button{background:#192637;color:#cbd5e1;border:1px solid #30445a;cursor:pointer;padding:0}
+.nav-grid button.answered{background:#173967;border-color:#3b82f6;color:#dbeafe}
+.nav-grid button.unsure{background:#4b350d;border-color:#a87918;color:#fde68a}
+.nav-grid button.current{outline:2px solid #7dd3fc;outline-offset:1px}
+.nav-grid button.correct{background:#133b27;border-color:#2c7a4a;color:#b7f7cd}
+.nav-grid button.wrong{background:#491923;border-color:#8e3447;color:#ffc0c9}
+.nav-grid button.partial{background:#49370e;border-color:#926f1d;color:#ffe09a}
+.nav-grid button.disputed-after{background:#35255b;border-color:#7558a5;color:#e2d5ff}
+.nav-grid button.missing-after{background:#25303a;border-color:#536579;color:#d9e2ec}
+.q.missing{border-style:dashed;border-color:#566474;background:#0c141d}.missing-box{margin-top:11px;padding:13px;border:1px dashed #5f7184;border-radius:10px;background:#0a121a;color:#c8d3df}.fb.missing-fb{background:rgba(100,116,139,.13);border-color:rgba(148,163,184,.35);color:#d8e1eb}
+.panel textarea{width:100%;height:350px;background:#07101a;color:#eef5fb;border:1px solid #30465c;border-radius:8px;padding:10px;font:14px/1.55 "Microsoft YaHei";resize:vertical}
+.close-row{display:flex;justify-content:flex-end;margin-top:10px}.close-row button{min-height:44px;padding:9px 18px;background:#2563eb;color:white;border:0;border-radius:9px;font-weight:800}
+.lock-note{display:none;padding:8px 11px;border-radius:9px;background:#11233a;border:1px solid #2f527a;color:#b9d8ff;font-size:13px;margin:8px 0}
+.lock-note.show{display:block}
+@media(max-width:700px){
+ .wrap{padding:12px 9px calc(150px + env(safe-area-inset-bottom))}
+ .hero{padding:17px 14px;border-radius:15px}.hero h1{font-size:21px}
+ .hero p{font-size:14px}.source-note{font-size:12px}
+ .topbar{top:3px}.qt{font-size:16px;min-width:210px}.q{padding:14px 11px;margin:10px 0}.opt{font-size:15px;padding:11px 9px}
+ .metrics{grid-template-columns:repeat(2,1fr)}.metrics .metric:last-child{grid-column:1/-1}
+ .pager{grid-template-columns:1fr 1fr}.page-pill{grid-column:1/-1;grid-row:1}.pager .prev{grid-column:1}.pager .next{grid-column:2}
+ .actions{grid-template-columns:1fr 1fr 1fr;width:calc(100% - 12px);bottom:max(5px,env(safe-area-inset-bottom));padding:6px}
+ .actions button{font-size:12px;padding:8px 5px}
+ .nav-grid{grid-template-columns:repeat(8,1fr);gap:5px}
+ .fab-nav{right:10px;bottom:calc(69px + env(safe-area-inset-bottom));width:46px;height:46px}
+}
+@media(max-width:390px){.nav-grid{grid-template-columns:repeat(7,1fr)}.badge,.topic,.dispute{font-size:11px}.page-status{font-size:11px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="hero">
+<h1>2023年注册测绘师｜测绘管理与法律法规真题</h1>
+<p>原资料可提取95题：1—80单项选择题，81—95多项选择题；第96—100题在原资料中缺失。页面仍按120分制展示，缺失5题自动计10分。</p>
+<div class="tags"><span class="tag">2023真题原卷</span><span class="tag">电脑 + 手机</span><span class="tag">10题/页</span><span class="tag">自动保存</span><span class="tag">全部解析</span><span class="tag warn">可标记“不确定/蒙”</span></div>
+<div class="source-note"><b>说明：</b>题干与选项按原资料2023年部分整理；原资料仅收录至第95题，第96—100题题干、选项缺失，本页不自行补造。为保持120分制，缺失的5道多选题自动计入10分。页面中的答案与解析为参考答案；少数资料文字不清或版本口径存在争议的题目已标为“争议题”，只要作答即给满分。</div>
+</section>
+
+<div class="topbar">
+  <div class="pbg"><div id="pbar" class="pbar"></div></div><div id="ptxt" class="ptxt">已作答 0 / 100</div>
+  <div class="page-status"><span id="pageInfo">第 1 / 10 页</span><span id="rangeInfo">1—10题</span></div>
+</div>
+<div id="lockNote" class="lock-note">已提交。本卷答案已锁定，全部题目解析均已开启；可翻页或用题号导航逐题查看。</div>
+<div id="quiz"></div>
+<div class="pager"><button class="prev" id="prevBtn" onclick="prevPage()">← 上一页</button><div class="page-pill" id="pagePill">第 1 / 10 页</div><button class="next" id="nextBtn" onclick="nextPage()">下一页 →</button></div>
+<section id="result" class="result"></section>
+<div id="msg" class="msg"></div>
+</div>
+
+<button class="fab-nav" aria-label="题号导航" onclick="openNav()">☷</button>
+<div class="actions">
+  <button class="primary" id="submitBtn" onclick="submitQuiz()">提交并判分</button>
+  <button class="copy" onclick="copyResults()">复制结果</button>
+  <button class="secondary" onclick="resetQuiz()">重新作答</button>
+</div>
+
+<div id="navModal" class="modal"><div class="panel"><h3>题号导航</h3><div class="panel-note">蓝色=已答，黄色=不确定；提交后绿色=正确，红色=错误，橙色=少选，紫色=争议题，灰色=原资料缺失。</div><div id="navGrid" class="nav-grid"></div><div class="close-row"><button onclick="closeNav()">关闭</button></div></div></div>
+<div id="copyModal" class="modal"><div class="panel"><h3>请手动复制答题结果</h3><textarea id="copyArea"></textarea><div class="close-row"><button onclick="closeCopy()">关闭</button></div></div></div>
+
+<script>
+const quizId='zcchs-2023-real-law-paged-v1';
+const pageSize=10;
+const qs=[{"t":"s","topic":"来华测绘","q":"根据《测绘法》规定，外国的组织或者个人在中华人民共和国领域和中华人民共和国管辖的其他海域从事测绘活动，应当经（ ）批准。","o":["A. 外交行政主管部门","B. 国务院测绘地理信息行政主管部门","C. 国务院测绘地理信息行政主管部门会同外交行政主管部门","D. 国务院测绘地理信息行政主管部门会同军队测绘部门"],"a":["D"],"e":"参考答案D。按本卷所依据的法规口径，外国组织或者个人来华测绘，应经国务院测绘地理信息主管部门会同军队测绘部门批准。"},{"t":"s","topic":"测绘资质","q":"下列关于测绘资质资格的说法中，错误的是（ ）。","o":["A. 国家对从事测绘活动的单位实行测绘资质管理制度","B. 从事测绘活动的专业技术人员应当具有相应执业资格条件","C. 个体工商户可以依法申请领取测绘资质证书","D. 军队测绘部门负责军事测绘单位的资质审查工作"],"a":["C"],"e":"参考答案C。测绘资质的申请主体应符合规定的单位主体条件，个体工商户不能作为本题所述测绘资质申请主体。"},{"t":"s","topic":"测绘资质专业类别","q":"下列选项中，不属于测绘资质专业类别的是（ ）。","o":["A. 地理信息工程","B. 导航电子地图制作","C. 互联网在线服务","D. 地理国情普查"],"a":["D"],"e":"参考答案D。原卷文字采用了当时资料中的专业类别表述；其中“地理国情普查”不属于本题列举的测绘资质专业类别。","disputed":true},{"t":"s","topic":"测绘资质受理","q":"下列关于审批机关对测绘资质申请作出的处理中，错误的是（ ）。","o":["A. 申请材料齐全并符合法定形式的，应当决定受理并出具受理通知书","B. 申请材料不齐全的，应当在规定期限内一次告知需要补正的全部内容","C. 逾期不告知的，自收到申请材料之日起即为受理","D. 申请事项依法不属于本审批机关职责范围的，应当受理，并转有关审批机关"],"a":["D"],"e":"参考答案D。不属于本机关职权范围的，应依法作出不予受理处理并告知申请人向有权机关申请，不是先受理再转办。"},{"t":"s","topic":"测绘资质变更","q":"测绘单位（ ）发生变更时，不属于本题所考的换发新测绘资质证书情形。","o":["A. （原资料文字不清）","B. 办公地址","C. （原资料文字不清）","D. （原资料文字不清）"],"a":["B"],"e":"原资料第5题仅能清晰辨认B项“办公地址”，其余选项无法可靠辨认。为避免自行补造原题，本题标为争议题；参考答案按B记录。","disputed":true},{"t":"s","topic":"资质申请责任","q":"对测绘资质申请材料真实性负责的是（ ）。","o":["A. 申请单位专业技术人员","B. 申请单位","C. 进行技术性审查的第三方","D. 审批机关"],"a":["B"],"e":"参考答案B。测绘资质申请单位应对其提交材料的真实性负责。"},{"t":"s","topic":"互联网地图服务","q":"下列业务中，不属于互联网地图服务专业类别业务的是（ ）。","o":["A. 地面移动测量","B. 地理位置定位","C. 地理信息上传标注","D. 地图数据库开发"],"a":["A"],"e":"参考答案A。地面移动测量不属于本题所列互联网地图服务业务。"},{"t":"s","topic":"保密管理","q":"下列保密管理要求中，属于导航电子地图制作专业补充要求的是（ ）。","o":["A. 软件开发不得在保密要害部门、部位内进行","B. 未经批准，涉密测绘成果不得带离保密要害部门、部位","C. 从事涉密测绘业务人员应签订保密责任书","D. 外业所用涉密计算机纳入涉密单机进行管理"],"a":["D"],"e":"参考答案D。本题考查导航电子地图制作专业的补充保密要求，D为对应表述。"},{"t":"s","topic":"专业技术人员","q":"下列关于测绘专业技术人员最低人数要求的说法中，错误的是（ ）。","o":["A. 大地测量甲级资质24人","B. 导航电子地图制作甲级资质40人","C. 测绘航空摄影甲级资质12人","D. 互联网地图服务甲级资质12人"],"a":["D"],"e":"参考答案D。按本卷所依据的分类分级标准口径，D所列互联网地图服务甲级“测绘专业技术人员12人”不符合题目要求。"},{"t":"s","topic":"注册测绘师责任","q":"因注册测绘师执业活动形成的测绘成果质量问题造成经济损失，承担赔偿责任的是（ ）。","o":["A. 注册单位","B. 注册测绘师个人","C. 测绘质量检验机构","D. 项目监理单位"],"a":["A"],"e":"参考答案A。执业成果由注册单位对外承担相应责任，注册测绘师个人还应承担其执业责任。"},{"t":"s","topic":"注册测绘师","q":"下列关于注册测绘师延续注册和变更注册的说法中，错误的是（ ）。","o":["A. 注册有效期满需继续执业的，应按规定申请延续注册","B. 注册单位发生变化的，应及时办理变更注册","C. 延续注册后重新计算注册有效期","D. 办理变更注册时不得同时办理延续注册"],"a":["D"],"e":"参考答案D。变更注册与延续注册并非当然互斥，题目把二者绝对排斥的表述错误。"},{"t":"s","topic":"继续教育","q":"注册测绘师继续教育必修内容培训每次为（ ）学时。","o":["A. 15","B. 20","C. 30","D. 60"],"a":["C"],"e":"参考答案C。按本卷所依据的继续教育规定口径，必修内容每次30学时。"},{"t":"s","topic":"注册测绘师考试","q":"以不正当手段取得注册测绘师资格证书的，在（ ）年内不得再次参加注册测绘师资格考试。","o":["A. 1","B. 2","C. 3","D. 5"],"a":["C"],"e":"参考答案C。按本卷所依据的制度规定，相关人员3年内不得再次参加资格考试。"},{"t":"s","topic":"质量检查验收","q":"下列选项中，不属于测绘成果质量检查验收依据的是（ ）。","o":["A. 明示的企业标准","B. 项目设计文件","C. 合同约定","D. 测绘质量检验机构提出的要求"],"a":["D"],"e":"参考答案D。质量判定依据应来自适用标准、设计和合同等明确要求，质检机构不能自行新增判定标准。"},{"t":"s","topic":"来华测绘限制","q":"下列测绘活动中，外国组织或者个人不得从事的是（ ）。","o":["A. 房产测绘","B. 海岸地形图测绘","C. 地下管线测量","D. 控制测量"],"a":["B"],"e":"参考答案B。原卷考查外国组织或者个人来华测绘的业务限制，B属于禁止范围。"},{"t":"s","topic":"涉密成果出境","q":"未经批准将测绘成果携带或者传输出境的，由（ ）依法处罚。","o":["A. 国务院测绘地理信息主管部门","B. 国家安全机关","C. 保密行政管理部门","D. 外交主管部门"],"a":["A"],"e":"参考答案A。按本卷所依据的来华测绘和成果管理规定，由测绘地理信息主管部门依法处理。"},{"t":"s","topic":"测绘作业证","q":"下列关于测绘作业证的说法中，错误的是（ ）。","o":["A. 测绘作业证不得涂改","B. 测绘作业证不得转借","C. 测绘人员调往其他单位后原测绘作业证可以继续使用","D. 测绘人员退休后，原测绘作业证应当收回"],"a":["C"],"e":"参考答案C。测绘作业证与持证人员及其单位管理关系相联系，调离原单位后不能继续使用原证。"},{"t":"s","topic":"招标投标","q":"招标单位让不具备相应测绘资质等级的单位中标，依法可以给予的处罚是（ ）。","o":["A. 警告","B. 通报批评","C. 罚款","D. 没收测绘成果"],"a":["C"],"e":"参考答案C。原卷对应的法定责任为罚款。"},{"t":"s","topic":"行业信用","q":"测绘单位受到本题所述较重行政处罚并被计入严重失信的，自处罚决定生效之日起（ ）年内不得申请晋升测绘资质等级。","o":["A. 1","B. 2","C. 3","D. 4"],"a":["C"],"e":"参考答案C。按本卷所依据的行业信用管理口径，限制期为3年。","disputed":true},{"t":"s","topic":"国家测绘基准","q":"国家设立和采用全国统一的重力基准，其数据由（ ）审核。","o":["A. 国务院住房城乡建设主管部门","B. 国务院测绘地理信息主管部门","C. 国务院发展改革部门","D. 军队测绘部门"],"a":["B"],"e":"参考答案B。国家统一测绘基准数据先由国务院测绘地理信息主管部门审核。"},{"t":"s","topic":"独立坐标系","q":"中等城市确需建立相对独立平面坐标系统的，由省级测绘地理信息主管部门（ ）。","o":["A. 审查","B. 备案","C. 登记","D. 批准"],"a":["D"],"e":"参考答案D。题目问的是省级主管部门对相关独立坐标系的批准权限。"},{"t":"s","topic":"基础测绘计划","q":"县级基础测绘年度计划由（ ）编制。","o":["A. 县级测绘地理信息主管部门","B. 县级发展改革主管部门","C. 县级发展改革主管部门会同县级测绘地理信息主管部门","D. 县级测绘地理信息主管部门会同县级发展改革主管部门"],"a":["C"],"e":"参考答案C。基础测绘年度计划由发展改革部门会同测绘地理信息主管部门编制。"},{"t":"s","topic":"财政投资测绘","q":"使用财政资金的测绘项目以及使用财政资金的建设工程测绘项目，有关部门批准立项前应当书面征求（ ）意见。","o":["A. 同级测绘地理信息主管部门","B. 同级发展改革主管部门","C. 同级住房城乡建设主管部门","D. 军队测绘部门"],"a":["A"],"e":"参考答案A。财政资金测绘项目立项前应依法征求同级测绘地理信息主管部门意见，避免重复测绘。"},{"t":"s","topic":"质量监督管理","q":"重大建设工程测绘地理信息项目的质量监督管理部门是（ ）。","o":["A. 测绘地理信息主管部门","B. 市场监督管理部门","C. 住房城乡建设主管部门","D. 项目立项部门"],"a":["A"],"e":"参考答案A。测绘地理信息主管部门负责相关测绘成果质量监督管理。"},{"t":"s","topic":"质量争议","q":"测绘单位与用户对测绘成果质量发生争议时，可以报（ ）处理。","o":["A. 市场监督管理部门","B. 测绘地理信息主管部门","C. 用户业务主管部门","D. 测绘质量检验机构"],"a":["B"],"e":"参考答案B。测绘成果质量争议可依法报测绘地理信息主管部门处理，必要时委托质检机构检验。"},{"t":"s","topic":"国界线测绘","q":"中华人民共和国国界线的测绘，由（ ）组织实施。","o":["A. 国务院测绘地理信息主管部门","B. 国务院民政部门","C. 外交部","D. 国务院"],"a":["C"],"e":"参考答案C。中华人民共和国国界线测绘按照边界条约或协定执行，由外交部组织实施。"},{"t":"s","topic":"地图审核","q":"根据《地图管理条例》，下列地图中，由国务院测绘地理信息主管部门负责审核的是（ ）。","o":["A. 台湾地区地图","B. 重庆市地图","C. 湖北省地图","D. 北京市地图"],"a":["A"],"e":"参考答案A。涉及台湾地区等重要内容的地图由国务院测绘地理信息主管部门审核。"},{"t":"s","topic":"公开地图精度","q":"公开地图表示的等高线等高距，按本卷所依据的规定最小不得小于（ ）m。","o":["A. 5","B. 10","C. 15","D. 20"],"a":["D"],"e":"参考答案D。本题按原卷所依据的公开地图表示规定口径作答。"},{"t":"s","topic":"地图审核","q":"下列地图中，依法需要履行地图审核程序的是（ ）。","o":["A. 景区地图","B. 地铁线路图","C. 街区地图","D. 城市地图"],"a":["D"],"e":"参考答案D。景区、街区、公共交通线路等内容简单的地图可有例外，城市地图属于一般应审核地图。"},{"t":"s","topic":"地图违法处罚","q":"应当送审的地图未经审核擅自向社会公开的，依法可处（ ）万元以下罚款。","o":["A. 3","B. 5","C. 10","D. 20"],"a":["D"],"e":"参考答案D。按原卷所依据法规口径，最高可处20万元罚款。"},{"t":"s","topic":"地图审图号","q":"下列内容中，不属于地图审图号组成部分的是（ ）。","o":["A. 地图名称英文缩写","B. 审图机构代码","C. 通过审核年份","D. 审核序号"],"a":["A"],"e":"参考答案A。审图号由审图机构代码、审核年份和审核序号等组成，不包含地图名称英文缩写。"},{"t":"s","topic":"涉密成果审批","q":"法人或者其他组织需要使用涉密基础测绘成果的，应报成果所在地（ ）审批。","o":["A. 信息化主管部门","B. 住房城乡建设主管部门","C. 测绘地理信息主管部门","D. 保密行政管理部门"],"a":["C"],"e":"参考答案C。涉密基础测绘成果提供使用由有审批权限的测绘地理信息主管部门依法审批。"},{"t":"s","topic":"涉密成果申请","q":"申请人隐瞒有关情况或者提供虚假材料申请使用涉密基础测绘成果的，自有关决定作出之日起（ ）年内不予受理其申请。","o":["A. 1","B. 2","C. 3","D. 5"],"a":["A"],"e":"参考答案A。按原卷所依据的涉密基础测绘成果提供使用规定，限制期为1年。"},{"t":"s","topic":"测绘违法处罚","q":"采用不符合国家标准的基础地理信息数据建立地理信息系统，按本卷所依据的规定最高可处（ ）万元罚款。","o":["A. 3","B. 5","C. 10","D. 15"],"a":["C"],"e":"参考答案C。此题按2023原卷所依据的当时规范口径保留，不以之后法规版本自行替换。"},{"t":"s","topic":"保密岗位","q":"根据保密管理有关规定，下列人员中，不属于本题所列涉密岗位工作人员分类的是（ ）。","o":["A. 核心涉密人员","B. 重要涉密人员","C. 一般涉密人员","D. 定密责任人员"],"a":["D"],"e":"参考答案D。涉密人员通常按核心、重要、一般分类，定密责任人员不是这组三类。"},{"t":"s","topic":"涉密成果销毁","q":"涉密测绘成果使用目的完成后按规定销毁，并报（ ）备案。","o":["A. 使用单位上级主管部门","B. 提供单位","C. 保密行政管理部门","D. 档案主管部门"],"a":["B"],"e":"参考答案B。按本卷所依据的管理规定，使用目的完成后履行销毁手续，并向提供单位备案。"},{"t":"s","topic":"保密培训","q":"涉密测绘成果生产、使用单位每年至少组织（ ）次保密教育培训。","o":["A. 1","B. 2","C. 3","D. 4"],"a":["A"],"e":"参考答案A。按原卷所依据规定，每年至少1次。"},{"t":"s","topic":"测量标志用地","q":"永久性测量标志地面标志的用地范围为（ ）m²。","o":["A. 16～36","B. 26～50","C. 36～100","D. 46～100"],"a":["C"],"e":"参考答案C。原卷考查永久性测量标志用地保护范围，参考答案为36～100m²。"},{"t":"s","topic":"房产测绘","q":"根据《房产测绘管理办法》，当事人对测绘成果有异议时，可以委托进行成果鉴定的是（ ）。","o":["A. 测绘行政主管部门","B. 住房城乡建设主管部门","C. 人民法院","D. 国家认定的房产测绘成果鉴定机构"],"a":["D"],"e":"参考答案D。房产测绘成果质量争议可委托国家认定的房产测绘成果鉴定机构鉴定。"},{"t":"s","topic":"房产测绘处罚","q":"房产面积测算不执行国家标准、规范和规定的，对测绘单位实施行政处罚的部门是（ ）。","o":["A. 县级以上测绘行政主管部门","B. 县级以上房地产行政主管部门","C. 市场监督管理部门","D. 发展改革主管部门"],"a":["B"],"e":"参考答案B。按本卷所依据的《房产测绘管理办法》口径，由房地产行政主管部门依法处理。"},{"t":"s","topic":"重要地理信息数据","q":"国务院授权有关部门公布重要地理信息数据时，应当在公告中注明（ ）。","o":["A. 审核依据","B. 审核时间","C. 审核部门","D. 审核编号"],"a":["D"],"e":"参考答案D。公布重要地理信息数据时应按规定注明审核编号。"},{"t":"s","topic":"应急测绘成果","q":"下列关于基础测绘成果应急提供的说法中，错误的是（ ）。","o":["A. 应急需要时可按规定调用所需基础测绘成果","B. 成果保管单位应及时提供应急所需成果","C. 应急调用成果不得擅自另作他用","D. 应急申领人可不办理任何成果使用审批手续"],"a":["D"],"e":"参考答案D。应急提供可简化流程，但不等于完全免除法定审批和保密管理要求。"},{"t":"s","topic":"业务档案","q":"负责测绘地理信息业务文件资料归档材料形成、整理和建档的是（ ）。","o":["A. 测绘地理信息主管部门","B. 档案保管机构","C. 项目承担单位","D. 项目委托单位"],"a":["C"],"e":"参考答案C。项目承担单位负责形成、积累、整理、分类和建档。"},{"t":"s","topic":"业务档案管理","q":"下列关于测绘地理信息业务档案管理的说法中，错误的是（ ）。","o":["A. 项目组织部门下达计划时，应按规定告知档案保管机构","B. 合同或设计书中应明确归档范围、时间和质量要求","C. 项目组织部门组织项目验收时，档案保管机构应参加项目验收","D. 国家或地方重大测绘地理信息项目业务档案验收由相应主管部门组织"],"a":["C"],"e":"参考答案C。档案验收与项目成果验收应按各自程序实施，不能把档案保管机构当然作为项目成果验收参加单位。"},{"t":"s","topic":"档案保管期限","q":"DEM、DOM、DLG、DRG生产项目的测区图幅接合表保管期限为（ ）年。","o":["A. 10","B. 15","C. 20","D. 30"],"a":["A"],"e":"参考答案A。本题按原卷所依据的业务档案保管期限表，保管10年。"},{"t":"s","topic":"质量检验报告","q":"测绘质量检验单位完成全部检验后，最迟应在（ ）个工作日内寄交检验报告及检验结论。","o":["A. 10","B. 20","C. 30","D. 40"],"a":["B"],"e":"参考答案B。按原卷所依据的质量监督抽查管理规定，期限为20个工作日。"},{"t":"s","topic":"行政区域界线","q":"行政区域界线联合检查的周期为（ ）年。","o":["A. 2","B. 3","C. 5","D. 7"],"a":["C"],"e":"参考答案C。行政区域界线联合检查一般每5年进行一次。"},{"t":"s","topic":"行政区域界线","q":"根据行政区域界线管理规定，下列说法中，错误的是（ ）。","o":["A. 生产建设需要移动界桩的，由毗邻行政区域人民政府协商一致并按规定测绘","B. 批准变更行政区域界线后，毗邻人民政府应按规定测绘","C. 行政区域界线详图是反映县级以上行政区域界线标准画法的国家专题地图","D. 生产建设用地横跨行政区域界线时，应事先征得毗邻各人民政府民政部门同意"],"a":["D"],"e":"参考答案D。行政区域界线事项由毗邻人民政府依法协调处理，D把主体和程序表述成直接征得双方民政部门同意，不符合原卷规定。"},{"t":"s","topic":"基准站备案","q":"下列选项中，不属于卫星导航定位基准站建设备案原则的是（ ）。","o":["A. 保障安全","B. 分级备案","C. 高效便捷","D. 标准规范"],"a":["D"],"e":"参考答案D。原卷所列原则包括保障安全、分级备案、信息共享、高效便捷等。"},{"t":"s","topic":"数据档案销毁","q":"根据基础地理信息数据档案管理有关规定，下列关于数据档案销毁的说法中，正确的是（ ）。","o":["A. 销毁前应按规定进行鉴定","B. 数据迁移后废弃原介质经鉴定后可直接销毁，无需审批","C. 销毁光盘时可以保留原光盘","D. 销毁后计算机系统中可以继续保留副本"],"a":["A"],"e":"参考答案A。档案销毁应先履行鉴定、审批等程序，不能擅自销毁或保留副本。"},{"t":"s","topic":"公开地图内容","q":"下列基础地理信息中，可以在公开地图上表示的是（ ）。","o":["A. 火车隧道高度","B. 海底电缆","C. 航道水深","D. 渡口内部结构"],"a":["B"],"e":"参考答案B。原卷区分实体与敏感属性，B可按规定表示，其余选项涉及限制表示的敏感属性或内部结构。"},{"t":"s","topic":"测绘合同","q":"根据测绘合同示范文本，下列内容中，不属于合同主要约定内容的是（ ）。","o":["A. 项目测绘范围","B. 项目执行技术标准","C. 项目负责人条件","D. 项目费用及支付方式"],"a":["C"],"e":"参考答案C。合同主要约定任务、范围、技术要求、期限、费用、成果交付和责任等，项目负责人条件不是本题所列主要内容。"},{"t":"s","topic":"测绘合同","q":"下列事项中，不属于测绘项目委托方权利和义务的是（ ）。","o":["A. 按合同约定提供必要资料和工作条件","B. 按约定支付测绘费用","C. 对测绘成果进行验收","D. 执行国家规定的测绘收费标准"],"a":["D"],"e":"参考答案D。执行收费标准主要是承揽单位报价和履约管理要求，不是本题所列委托方权利义务。"},{"t":"s","topic":"联合体投标","q":"关于测绘项目联合体投标，下列说法中，错误的是（ ）。","o":["A. 联合体各方应签订共同投标协议","B. 联合体资质等级按成员中资质较高的一方确定","C. 联合体各方应共同对招标人承担责任","D. 联合体应按招标文件要求提交共同投标协议"],"a":["B"],"e":"参考答案B。同一专业组成联合体时，资质等级按资质等级较低的成员确定。"},{"t":"s","topic":"成本费用定额","q":"某测区平均海拔约4000m，按本卷所依据的测绘生产成本费用定额，高原调整系数增加值为（ ）。","o":["A. 0.10","B. 0.08","C. 0.07","D. 0.06"],"a":["C"],"e":"参考答案C。本题按原卷使用的成本费用定额口径，海拔4000m对应增加0.07。"},{"t":"s","topic":"成本费用","q":"下列费用中，不属于本题所列测绘生产成本费用项目的是（ ）。","o":["A. 辅助费用","B. 项目设备折旧费","C. 期间费用","D. 相应管理费用"],"a":["B"],"e":"参考答案B。原卷将项目设备折旧费作为不属于该组成本费用项目的选项。"},{"t":"s","topic":"海洋测绘定额","q":"按照本卷所依据的成本费用定额，海底地形测量定额不包括（ ）。","o":["A. 航海费用","B. 船舶费用","C. 辅助费用","D. 租船费用"],"a":["D"],"e":"参考答案D。原卷参考口径下，租船费用不包含在该定额组成中。"},{"t":"s","topic":"质量监督","q":"下列质量活动中，不能由测绘单位自行开展的是（ ）。","o":["A. 对本单位测绘成果实施过程检查","B. 对本单位测绘成果实施最终检查","C. 对本单位测绘产品质量实施监督检验","D. 开展内部质量审核"],"a":["C"],"e":"参考答案C。监督检验属于主管部门组织的质量监督活动，不等同于测绘单位内部过程检查和最终检查。"},{"t":"s","topic":"生产质量管理","q":"根据测绘生产质量管理规定，某生产岗位人员的做法中，符合要求的是（ ）。","o":["A. 项目技术设计要求和行业标准不一致时，自行选择较方便的执行","B. 发现原始观测数据存在异常后直接修改原记录","C. 检查人员发现问题后口头通知作业人员修改，不留记录","D. 使用GNSS接收机前在已知点进行卫星接收测试并检查测量精度"],"a":["D"],"e":"参考答案D。测绘仪器投入生产前应按要求检查、测试；质量记录应真实完整，不能自行篡改或不留痕。"},{"t":"s","topic":"技术设计流程","q":"下列关于测绘技术设计过程的说法中，错误的是（ ）。","o":["A. 应进行设计策划","B. 应识别并确定设计输入","C. 应形成符合要求的设计输出","D. 设计输出完成后可直接审批，不需要设计评审"],"a":["D"],"e":"参考答案D。技术设计通常包括策划、输入、输出、评审、必要的验证以及审批等环节。"},{"t":"s","topic":"项目技术设计书","q":"下列内容中，不属于项目技术设计书“设计方案”部分的是（ ）。","o":["A. 进度安排","B. 上交和归档成果及资料清单","C. 质量保证措施和要求","D. 软件和硬件配置要求"],"a":["A"],"e":"参考答案A。进度安排通常作为项目组织与进度内容，不属于题目所指“设计方案”技术内容。"},{"t":"s","topic":"专题地图技术设计","q":"专题地图制作项目的设计方案中，不应包括（ ）。","o":["A. 规定地图层次结构设计要求","B. 规定地图数据接边要求","C. 规定地图图面配置要求","D. 规定地图符号表示要求"],"a":["A"],"e":"参考答案A。按原卷所依据的专题地图技术设计规定，B、C、D属于专题地图制作设计方案内容。"},{"t":"s","topic":"技术设计审批","q":"下列选项中，不属于测绘技术设计文件审批依据的是（ ）。","o":["A. 设计输入内容","B. 项目中标金额","C. 项目合同或任务书","D. 设计评审意见"],"a":["B"],"e":"参考答案B。技术设计审批以任务、合同、设计输入、评审等技术依据为主，中标金额不是技术设计审批依据。"},{"t":"s","topic":"独立坐标系","q":"申请建立相对独立平面坐标系统时，下列材料中，不属于本题所列申请材料的是（ ）。","o":["A. 建立相对独立坐标系统的必要性说明","B. 技术方案","C. 测绘质量检验机构资质材料","D. 与国家坐标系统的联系方式"],"a":["C"],"e":"参考答案C。申请重点提供必要性、技术方案、与国家坐标系统联系方式等，不要求提交质检机构资质材料。"},{"t":"s","topic":"野外涉水安全","q":"下列野外涉水作业做法中，不符合安全要求的是（ ）。","o":["A. 水深0.6m、流速3m/s时，在确认安全的条件下按规定徒涉","B. 涉水前判断河床、水流及上下游情况","C. 使用船只时检查船只并由有经验人员操纵","D. 水深0.6m且流速较大时仍直接徒涉"],"a":["D"],"e":"参考答案D。按原卷所依据的安全规范，流速较大时徒涉水深条件更严格，不能仍按0.6m处理。"},{"t":"s","topic":"质量判定","q":"某1:500地形图单位成果检查发现3个B类错漏、1个C类错漏、1个D类错漏。下列判断中，符合本卷所依据质量评定规则的是（ ）。","o":["A. 该成果一定为优级","B. 该成果一定为良级","C. 该成果一定不合格","D. 处于生产困难类别较高地区时，该成果仍可能评为合格"],"a":["D"],"e":"参考答案D。质量扣分还应结合困难类别等标准中的调整规则综合计算，不能仅凭错漏数量绝对判断。"},{"t":"s","topic":"样本质量等级","q":"某样本9个单位成果质量得分为93、91、95、92、85、79、77、75、75，样本质量等级为（ ）。","o":["A. 优级","B. 良级","C. 中级","D. 合格"],"a":["B"],"e":"参考答案B。样本无不合格单位成果，按平均得分83.6分评定为良级。"},{"t":"s","topic":"样本外概查","q":"根据测绘成果质量检查与验收规定，下列关于样本外成果概查的说法中，错误的是（ ）。","o":["A. 根据需要可以不进行样本外概查","B. 样本外概查结果应直接计入样本质量等级计算","C. 对样本外发现的系统性或严重问题应按规定处理","D. 样本外概查可用于发现批成果系统性质量问题"],"a":["B"],"e":"参考答案B。样本外概查结果用于检验批整体判断，但不直接并入已抽取样本的质量等级计算。"},{"t":"s","topic":"数学精度评分","q":"某数字测绘成果质量检查中，高程中误差为0.6m，允许中误差为1.2m。按本卷所依据的评分方法，该质量子元素得分为（ ）。","o":["A. 80","B. 85","C. 88.57","D. 94"],"a":["C"],"e":"参考答案C。按原卷采用的数学精度质量评分公式计算，得分约为88.57分。"},{"t":"s","topic":"质量检查报告","q":"关于数字测绘成果质量检查报告内容的说法中，正确的是（ ）。","o":["A. 检验结论可以打印，不需签字","B. 检验报告只需检验机构负责人签字，不需盖章","C. 检验报告中的日期可以手工涂改","D. 按本卷所依据的报告格式要求，应在规定位置加盖单位公章"],"a":["D"],"e":"参考答案D。本题涉及旧版质量检验报告格式细节，不同版本格式要求可能变化，按原卷口径参考作答。","disputed":true},{"t":"s","topic":"技术总结","q":"下列关于测绘技术总结编写的说法中，正确的是（ ）。","o":["A. 质量检查不合格的成果也可作为最终成果写入技术总结","B. 技术总结必须由单位法定代表人亲自编写","C. 技术总结应反映技术设计执行、变更以及成果质量等实际情况","D. 新技术、新方法只需作简要说明，不需说明实际效果"],"a":["C"],"e":"参考答案C。技术总结是项目完成后的实际技术总结，应反映设计执行、变更、成果质量以及新技术效果等。"},{"t":"s","topic":"机载激光雷达","q":"下列内容中，不属于机载激光雷达测量飞行质量检查内容的是（ ）。","o":["A. 航线覆盖","B. 航高控制","C. 飞行姿态","D. 点云密度"],"a":["D"],"e":"参考答案D。点云密度属于成果数据质量指标，不属于本题所列飞行质量检查内容。"},{"t":"s","topic":"大地测量档案","q":"下列大地测量成果档案中，保管期限为10年的是（ ）。","o":["A. 坐标观测联测手簿、观测数据","B. 国家大地控制点成果表","C. 国家高程控制网最终成果","D. 国家重力基准成果"],"a":["A"],"e":"参考答案A。本题按原卷所依据的业务档案保管期限表，观测联测手簿和观测数据保管10年。"},{"t":"s","topic":"光盘档案","q":"下列关于光盘档案管理使用的说法中，错误的是（ ）。","o":["A. 光盘应编号并建立检索关系","B. 光盘存放应避免划伤、污染","C. 不得使用油性笔在光盘背面作任何标记","D. 应定期检查光盘可读性并按规定迁移数据"],"a":["C"],"e":"参考答案C。按原卷所依据的档案保护规范，允许使用符合要求的软性油性笔在规定位置进行标识，并非绝对禁止。"},{"t":"s","topic":"数据维护","q":"下列关于基础地理信息数据维护的说法中，正确的是（ ）。","o":["A. 磁带类载体最长使用寿命统一为5年","B. 数据复制发现问题时可在60天内处理","C. 数据格式转换完成后原数据只需保存1年","D. 当存储介质累计读写错误达到规定次数时应停止使用并迁移数据"],"a":["D"],"e":"参考答案D。介质使用维护应根据检测结果及时迁移，累计读写错误达到标准阈值时应停止使用。"},{"t":"s","topic":"档案归档","q":"下列关于基础地理信息数据档案文件归档的说法中，正确的是（ ）。","o":["A. 一般以每份文件作为1件，附件与正文必须分成2件","B. 所有文件归档前均应使用塑料封装","C. 文件没有题名时，由形成单位或保管单位补充拟题名","D. 传真件、热敏纸等可按原介质长期直接归档"],"a":["C"],"e":"参考答案C。归档文件缺少题名时，应补充拟题名；不耐久载体应转换到耐久介质。"},{"t":"s","topic":"困难类别","q":"下列说法中，正确的是（ ）。","o":["A. 高原地区海拔高于或等于3500m时，应按规定增加相应高原困难系数","B. 测绘生产天数一年统一按220天计算","C. 所有比例尺地形图均使用同一困难类别划分","D. 1:500地形图困难类别越高，定额越低"],"a":["A"],"e":"参考答案A。原卷考查高原困难类别及定额调整，海拔达到规定高度后需增加高原困难系数。"},{"t":"s","topic":"成果交付","q":"测绘产品交付后进行售后服务时，不应再作为成果质量评定依据考虑的是（ ）。","o":["A. 法律法规要求","B. 顾客反馈","C. 产品使用中的质量问题","D. 成果的经济价值"],"a":["D"],"e":"参考答案D。售后质量管理关注合规、顾客反馈和使用质量问题，经济价值不是本题所列质量判定因素。"},{"t":"s","topic":"内部审核","q":"下列事项中，不属于测绘单位质量管理体系内部审核要求的是（ ）。","o":["A. 确认质量管理体系运行有效性","B. 对员工进行岗位培训","C. 对发现的问题采取纠正措施","D. 形成并保存内部审核记录"],"a":["B"],"e":"参考答案B。岗位培训属于人力资源和能力管理活动，不是内部审核本身的要求。"},{"t":"s","topic":"最终检查","q":"关于测绘成果最终检查的说法中，错误的是（ ）。","o":["A. 最终检查由测绘单位质量管理部门组织实施","B. 最终检查内业和外业均必须对全部单位成果实行全数检查","C. 最终检查应按规定评定单位成果质量","D. 最终检查完成后应形成检查记录或报告"],"a":["B"],"e":"参考答案B。最终检查内业一般全数检查，外业检查项可按规定抽样，并非所有外业检查都必须全数。"},{"t":"m","topic":"救济途径","q":"当事人对测绘行政处罚决定不服的，可以依法采取的救济途径有（ ）。","o":["A. 直接要求作出处罚机关撤销处罚","B. 申请仲裁","C. 申请行政复议","D. 提起行政诉讼","E. 申请行业协会裁决"],"a":["C","D"],"e":"参考答案CD。对行政处罚决定不服，可依法申请行政复议或者提起行政诉讼。"},{"t":"m","topic":"资质处罚决定","q":"下列行政处罚中，依法由测绘资质证书发证部门决定的有（ ）。","o":["A. 降低测绘资质等级","B. 暂扣测绘资质证书","C. 吊销测绘资质证书","D. 没收违法工具","E. 没收违法所得"],"a":["A","B","C"],"e":"参考答案ABC。涉及测绘资质等级和证书状态的处罚，由发证机关依法决定。"},{"t":"m","topic":"质量管理制度","q":"下列制度中，属于测绘单位应建立的质量管理相关制度的有（ ）。","o":["A. 技术管理制度","B. 质量检查制度","C. 人员培训与岗位管理制度","D. 仪器设备检定和校准制度","E. 工程财务制度"],"a":["A","B","C","D"],"e":"参考答案ABCD。技术、质量、人员能力和仪器设备均是测绘质量管理体系的重要组成。"},{"t":"m","topic":"测绘相关专业","q":"下列专业中，按本卷所依据的测绘资质专业技术人员分类，可作为测绘相关专业的有（ ）。","o":["A. 遥感","B. 地理信息","C. 地理","D. 地质","E. 工程勘察"],"a":["A","B","C","D","E"],"e":"参考答案ABCDE。本题专业分类属于版本性较强的资质口径，按2023原卷所依据的分类保留。","disputed":true},{"t":"m","topic":"注册测绘师签章","q":"下列文件中，按本卷所依据的执业管理规定，需要注册测绘师签字并加盖执业印章的有（ ）。","o":["A. 测绘项目立项报告","B. 测绘项目技术设计文件","C. 测绘项目最终成果文件","D. 测绘项目质量检验报告","E. 测绘项目监理报告"],"a":["B","C","D","E"],"e":"参考答案BCDE。技术设计、最终成果、质量检验和监理等执业文件属于本题所列签字盖章范围。"},{"t":"m","topic":"重要地理信息数据","q":"重要地理信息数据的建议或征集来源可以包括（ ）。","o":["A. 测绘地理信息主管部门征集","B. 有关单位按规定提出建议","C. 县级以上人民政府依法公布","D. 经核实的社会公众报告或建议","E. 自媒体未经核实的信息直接作为公布依据"],"a":["A","B","C","D"],"e":"参考答案ABCD。重要地理信息数据须经法定审核公布，未经核实的自媒体信息不能直接作为公布依据。"},{"t":"m","topic":"公开地图","q":"下列地理信息或设施中，公开地图不得表示或者应作限制表示的有（ ）。","o":["A. 军事禁区内设施","B. 爆炸物品储存库","C. 重要输油、输气管线","D. 卫星导航定位基准站","E. 海岸线"],"a":["A","B","C","D"],"e":"参考答案ABCD。海岸线可以依法公开表示，其他选项涉及国家安全、重要基础设施或敏感测绘设施。"},{"t":"m","topic":"地图出版","q":"地图出版物正式出版前，按本卷所依据的出版管理规定应报送样本或备案的机构有（ ）。","o":["A. 国家图书馆","B. 中国版本图书馆","C. 国务院出版行政主管部门有关机构","D. 国务院测绘地理信息主管部门","E. 国务院旅游主管部门"],"a":["A","B","C"],"e":"参考答案ABC。原卷考查出版物样本缴送制度，D、E不属于本题所列缴送机构。"},{"t":"m","topic":"重要地理信息数据使用","q":"下列工作中，应当使用依法公布的重要地理信息数据的有（ ）。","o":["A. 行政管理","B. 新闻传播","C. 对外交往","D. 单位内部业务培训","E. 学校教学"],"a":["A","B","C","E"],"e":"参考答案ABCE。行政管理、新闻传播、对外交往和教学等面向公共或正式使用场景，应采用依法公布的数据。"},{"t":"m","topic":"涉密成果申请","q":"申请使用涉密基础测绘成果，申请人应当具备或说明的条件有（ ）。","o":["A. 用途必须限定为公益事业","B. 申请主体应为符合规定的法人或者组织","C. 有明确、合法、具体的使用目的","D. 申请成果范围和数量应与实际需要相符","E. 具备符合规定的保密管理条件"],"a":["B","C","D","E"],"e":"参考答案BCDE。涉密成果使用并不只限公益事业，但申请主体、用途、范围和保密条件必须符合要求。"},{"t":"m","topic":"涉密成果申请材料","q":"申请使用涉密基础测绘成果时，申请表或相关材料应包括的内容有（ ）。","o":["A. 单位统一社会信用代码等主体信息","B. 经办人身份信息","C. 第三方合作单位全部人员名单","D. 使用目的、预计使用期限和任务来源","E. 申请单位测绘资质等级"],"a":["A","B","E"],"e":"参考答案ABE。原卷参考答案为ABE；申请材料的具体栏目随管理办法版本变化，本题按2023原卷口径保留。","disputed":true},{"t":"m","topic":"测量标志保护","q":"下列措施中，属于永久性测量标志保护措施的有（ ）。","o":["A. 设置必要的保护设施和警示标志","B. 对测量标志进行维护","C. 建立保管责任和巡查制度","D. 严格永久性测量标志迁建审批和监督","E. 测量标志损坏后原则上不再维修或重建"],"a":["A","B","C","D"],"e":"参考答案ABCD。测量标志应依法保护、维护和监管，损坏后不能以“不再维修重建”为原则。"},{"t":"m","topic":"生产质量管理","q":"某测绘单位在承接一项大项目并采用新工艺组织生产时，下列做法中，不符合质量管理要求的有（ ）。","o":["A. 对重大项目或者新技术项目先实施首件产品质量检验","B. 设计变更由作业人员自行决定，不再履行批准程序","C. 检查人员根据个人经验随意设置检查点，不按检查方案实施","D. 由质量负责人承担全部产品的直接生产质量责任","E. 作业人员自检合格后即可直接交付下一工序，不履行规定的过程检查"],"a":["B","C","D","E"],"e":"参考答案BCDE。首件检验属于合理质量控制；设计变更、检查点设置、责任划分和过程检查均应按制度实施。","disputed":true},{"t":"m","topic":"招投标监管","q":"依法对测绘项目招标投标活动实施监督管理的部门有（ ）。","o":["A. 发展改革主管部门","B. 测绘地理信息主管部门","C. 住房城乡建设主管部门","D. 市场监督管理部门","E. 财政主管部门"],"a":["B","D"],"e":"参考答案BD。本题按2023原卷所依据的监管口径保留，涉及旧版部门职责表述。","disputed":true},{"t":"m","topic":"设计输入","q":"关于测绘技术设计的设计输入，下列说法中，正确的有（ ）。","o":["A. 技术设计负责人应按规定确定书面设计输入","B. 相似的正在实施项目形成的设计资料可以作为输入参考","C. 市场需求和顾客期望不属于设计输入考虑内容","D. 已完成的类似项目质量记录可以作为设计输入参考","E. 设计输入仅限法律法规和强制性标准"],"a":["A","B","D"],"e":"参考答案ABD。任务、合同、顾客要求、适用标准及类似项目经验等均可作为设计输入，不应把设计输入绝对限定为强制标准。"},{"t":"m","topic":"原资料缺失","q":"原资料未提供第96题题干与选项。","o":[],"a":[],"e":"原PDF的2023年部分仅收录至第95题。本页不自行补造第96—100题；为保持整卷120分制和与其他年份成绩可比较性，本题自动计2分。","missing":true},{"t":"m","topic":"原资料缺失","q":"原资料未提供第97题题干与选项。","o":[],"a":[],"e":"原PDF的2023年部分仅收录至第95题。本页不自行补造第96—100题；为保持整卷120分制和与其他年份成绩可比较性，本题自动计2分。","missing":true},{"t":"m","topic":"原资料缺失","q":"原资料未提供第98题题干与选项。","o":[],"a":[],"e":"原PDF的2023年部分仅收录至第95题。本页不自行补造第96—100题；为保持整卷120分制和与其他年份成绩可比较性，本题自动计2分。","missing":true},{"t":"m","topic":"原资料缺失","q":"原资料未提供第99题题干与选项。","o":[],"a":[],"e":"原PDF的2023年部分仅收录至第95题。本页不自行补造第96—100题；为保持整卷120分制和与其他年份成绩可比较性，本题自动计2分。","missing":true},{"t":"m","topic":"原资料缺失","q":"原资料未提供第100题题干与选项。","o":[],"a":[],"e":"原PDF的2023年部分仅收录至第95题。本页不自行补造第96—100题；为保持整卷120分制和与其他年份成绩可比较性，本题自动计2分。","missing":true}];
+const totalPages=Math.ceil(qs.length/pageSize);
+let currentPage=0;
+let submitted=false;
+
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function ans(i){return [...document.querySelectorAll(`input[name="q${i}"]:checked`)].map(e=>e.value).sort()}
+function savedAnswers(){
+  const out=[];
+  for(let i=0;i<qs.length;i++){
+    const els=[...document.querySelectorAll(`input[name="q${i}"]:checked`)];
+    out.push(els.map(e=>e.value).sort());
+  }
+  return out;
+}
+function same(a,b){return a.length===b.length&&a.every((v,i)=>v===b[i])}
+function stateData(){
+  let prev=null;try{prev=JSON.parse(localStorage.getItem(quizId)||'null')}catch(e){}
+  const base=prev&&Array.isArray(prev.answers)?prev.answers:Array(qs.length).fill(null).map(()=>[]);
+  const guesses=prev&&Array.isArray(prev.guesses)?prev.guesses:Array(qs.length).fill(false);
+  document.querySelectorAll('.q').forEach(sec=>{
+    const i=Number(sec.dataset.index);
+    base[i]=ans(i);
+    const g=document.querySelector(`[data-g="${i}"]`);
+    if(g)guesses[i]=g.checked;
+  });
+  return {answers:base,guesses,currentPage,submitted};
+}
+function save(){
+  try{localStorage.setItem(quizId,JSON.stringify(stateData()))}catch(e){}
+  updateProgress();renderNav();
+}
+function loadState(){
+  try{
+    const s=JSON.parse(localStorage.getItem(quizId)||'null');
+    if(!s)return null;
+    currentPage=Math.max(0,Math.min(totalPages-1,Number(s.currentPage)||0));
+    submitted=!!s.submitted;
+    return s;
+  }catch(e){return null}
+}
+let loadedState=loadState();
+
+function getStoredAnswer(i){
+  if(loadedState&&Array.isArray(loadedState.answers))return loadedState.answers[i]||[];
+  try{const s=JSON.parse(localStorage.getItem(quizId)||'null');return s?.answers?.[i]||[]}catch(e){return []}
+}
+function getStoredGuess(i){
+  if(loadedState&&Array.isArray(loadedState.guesses))return !!loadedState.guesses[i];
+  try{const s=JSON.parse(localStorage.getItem(quizId)||'null');return !!s?.guesses?.[i]}catch(e){return false}
+}
+
+function renderPage(){
+  const start=currentPage*pageSize,end=Math.min(start+pageSize,qs.length);
+  let h='';
+  if(start===0)h+='<div class="section">一、单项选择题（1—80，每题1分）</div>';
+  if(start===80)h+='<div class="section">二、多项选择题（81—100，每题2分；错选0分，少选每个正确选项0.5分）</div>';
+  for(let i=start;i<end;i++){
+    const x=qs[i],stored=getStoredAnswer(i),guess=getStoredGuess(i);
+    if(x.missing){
+      h+=`<section class="q missing" id="q${i}" data-index="${i}">
+        <div class="qh"><span class="badge">多选</span><span class="topic">原资料缺失</span><div class="qt">${i+1}. ${esc(x.q)}</div></div>
+        <div class="missing-box">原PDF的2023年部分仅收录至第95题。第${i+1}题不自行补造，本题按2分自动计入，仅用于保持整卷120分制。</div>
+        <div id="fb${i}" class="fb"></div>
+      </section>`;
+      continue;
+    }
+    h+=`<section class="q ${guess?'unsure':''} ${x.disputed?'disputed':''}" id="q${i}" data-index="${i}">
+      <div class="qh"><span class="badge">${x.t==='s'?'单选':'多选'}</span><span class="topic">${esc(x.topic)}</span>${x.disputed?'<span class="dispute">争议题</span>':''}<div class="qt">${i+1}. ${esc(x.q)}</div></div>
+      ${x.o.map(v=>{const val=v[0],checked=stored.includes(val);return `<label class="opt ${checked?'checked':''}"><input ${submitted?'disabled':''} type="${x.t==='s'?'radio':'checkbox'}" name="q${i}" value="${val}" ${checked?'checked':''} onchange="changed(${i})">${esc(v)}</label>`}).join('')}
+      <label class="guess"><input ${submitted?'disabled':''} type="checkbox" data-g="${i}" ${guess?'checked':''} onchange="guessChanged(${i},this.checked)">这题我不确定 / 是蒙的</label>
+      <div id="fb${i}" class="fb"></div>
+    </section>`;
+  }
+  document.getElementById('quiz').innerHTML=h;
+  document.getElementById('pageInfo').textContent=`第 ${currentPage+1} / ${totalPages} 页`;
+  document.getElementById('rangeInfo').textContent=`${start+1}—${end}题`;
+  document.getElementById('pagePill').textContent=`第 ${currentPage+1} / ${totalPages} 页`;
+  document.getElementById('prevBtn').disabled=currentPage===0;
+  document.getElementById('nextBtn').disabled=currentPage===totalPages-1;
+  document.getElementById('submitBtn').disabled=submitted;
+  document.getElementById('lockNote').classList.toggle('show',submitted);
+  if(submitted)showFeedbackForPage();
+  updateProgress();renderNav();
+  loadedState=null;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function changed(i){
+  document.querySelectorAll(`input[name="q${i}"]`).forEach(e=>e.closest('.opt').classList.toggle('checked',e.checked));
+  save();
+}
+function guessChanged(i,v){document.getElementById(`q${i}`).classList.toggle('unsure',v);save()}
+
+function allState(){
+  const s=stateData();
+  return s;
+}
+function calc(){
+  const s=allState();
+  let score=0,exact=0,solid=0,guessed=0,guessedCorrect=0,unanswered=0,missingCount=0;
+  const d=qs.map((q,i)=>{
+    if(q.missing){
+      score+=2;exact++;missingCount++;
+      return {i:i+1,a:'-',c:'-',g:false,answered:true,ok:true,pts:2,topic:q.topic,disputed:false,disputedAnswered:false,missing:true};
+    }
+    const a=(s.answers[i]||[]).slice().sort(),c=[...q.a].sort(),g=!!s.guesses[i],answered=a.length>0;
+    if(!answered)unanswered++;
+    let ok=same(a,c),pts=0,disputedAnswered=!!q.disputed&&answered;
+    if(disputedAnswered){pts=q.t==='s'?1:2;ok=true}
+    else if(q.t==='s')pts=ok?1:0;
+    else{
+      const wrong=a.some(x=>!c.includes(x));
+      if(wrong)pts=0;else if(ok)pts=2;else pts=a.length*.5;
+    }
+    score+=pts;if(ok&&answered)exact++;if(g)guessed++;if(g&&ok&&answered)guessedCorrect++;if(ok&&answered&&!g)solid++;
+    return {i:i+1,a:a.join('')||'-',c:c.join(''),g,answered,ok,pts,topic:q.topic,disputed:!!q.disputed,disputedAnswered,missing:false};
+  });
+  return {score,exact,solid,guessed,guessedCorrect,unanswered,missingCount,d};
+}
+function feedbackHTML(q,d){
+  if(d.missing){
+    return {cls:'missing-fb',html:`□ 原资料缺失（自动计2.0分）<br><strong>说明：</strong>${esc(q.e)}`};
+  }
+  let cls='bad',label='✗ 错误';
+  if(!d.answered){cls='bad';label='✗ 未作答'}
+  else if(d.disputedAnswered){cls='disp';label='◇ 争议题（已作答，按满分计）'}
+  else if(d.g&&d.ok){cls='warn';label='△ 不确定/蒙对，仍建议复盘'}
+  else if(d.ok){cls='ok';label='✓ 正确'}
+  else if(d.pts>0){cls='warn';label='△ 少选，获得部分分'}
+  return {cls,html:`${label}（${d.pts.toFixed(1)}分）<br>你的答案：${esc(d.a)}　参考答案：${esc(d.c)}<br><strong>解析：</strong>${esc(q.e)}`};
+}
+function showFeedbackForPage(){
+  const r=calc(),start=currentPage*pageSize,end=Math.min(start+pageSize,qs.length);
+  for(let i=start;i<end;i++){
+    const f=document.getElementById(`fb${i}`),obj=feedbackHTML(qs[i],r.d[i]);
+    if(f){f.className=`fb show ${obj.cls}`;f.innerHTML=obj.html}
+  }
+}
+function submitQuiz(){
+  const s=allState();
+  const answerable=qs.filter(q=>!q.missing).length;
+  const answered=s.answers.filter((a,i)=>!qs[i].missing&&a&&a.length).length;
+  if(answered<answerable){
+    const ok=confirm(`当前还有 ${answerable-answered} 道可作答题未作答。原资料缺失的5题无需作答并自动计分。确定现在提交吗？提交后答案将锁定。`);
+    if(!ok)return;
+  }else{
+    if(!confirm('确定提交整套试卷吗？提交后答案将锁定，并显示全部可核对题目的解析。'))return;
+  }
+  submitted=true;
+  try{localStorage.setItem(quizId,JSON.stringify({...s,submitted:true,currentPage}))}catch(e){}
+  renderPage();
+  showResult();
+}
+function showResult(){
+  const r=calc();
+  const wrong=r.d.filter(x=>!x.missing&&x.answered&&!x.ok&&!x.disputedAnswered);
+  const need=r.d.filter(x=>!x.missing&&(!x.ok||x.g)).map(x=>x.i);
+  const res=document.getElementById('result');
+  res.className='result show';
+  res.innerHTML=`<div class="score">${r.score.toFixed(1)} / 120</div>
+  <div class="result-tip">原资料可核对题为1—95题；第96—100题资料缺失，已自动计入10分。提交后可翻页查看所有参考解析和缺失说明。</div>
+  <div class="metrics">
+   <div class="metric"><strong>${r.exact}</strong>完整答对/争议已答/缺失自动计分</div>
+   <div class="metric"><strong>${r.solid}</strong>确定答对</div>
+   <div class="metric"><strong>${r.guessed}</strong>不确定/蒙</div>
+   <div class="metric"><strong>${wrong.length}</strong>错题/少选</div>
+   <div class="metric"><strong>${r.unanswered}</strong>未作答（不含缺失题）</div>
+  </div>
+  <div class="review">重点复习题号：${need.length?need.join('、'):'无'}<br>资料缺失：96—100题，共5题，自动计10分。<br>说明：题干与选项按原资料整理；答案与解析为参考答案，争议题按“作答即得满分”处理。</div>`;
+}
+function goPage(p){
+  const live=stateData();
+  currentPage=Math.max(0,Math.min(totalPages-1,p));
+  try{localStorage.setItem(quizId,JSON.stringify({...live,currentPage,submitted}))}catch(e){}
+  loadedState={...live,currentPage,submitted};
+  renderPage();
+}
+function prevPage(){if(currentPage>0)goPage(currentPage-1)}
+function nextPage(){if(currentPage<totalPages-1)goPage(currentPage+1)}
+function goQuestion(n){
+  closeNav();const p=Math.floor((n-1)/pageSize);
+  const live=stateData();currentPage=p;
+  try{localStorage.setItem(quizId,JSON.stringify({...live,currentPage,submitted}))}catch(e){}
+  loadedState={...live,currentPage,submitted};renderPage();
+  setTimeout(()=>document.getElementById(`q${n-1}`)?.scrollIntoView({behavior:'smooth',block:'start'}),120);
+}
+function updateProgress(){
+  const s=stateData(),answerable=qs.filter(q=>!q.missing).length;
+  const n=s.answers.filter((a,i)=>!qs[i].missing&&a&&a.length).length;
+  document.getElementById('pbar').style.width=(n/answerable*100)+'%';
+  document.getElementById('ptxt').textContent=`已作答 ${n} / ${answerable}｜资料缺失5题自动计分`;
+}
+function renderNav(){
+  const grid=document.getElementById('navGrid');if(!grid)return;
+  const s=stateData(),r=submitted?calc():null;
+  grid.innerHTML=qs.map((q,i)=>{
+    let cls=[];
+    if(q.missing)cls.push('missing-after');
+    else{
+      if((s.answers[i]||[]).length)cls.push('answered');if(s.guesses[i])cls.push('unsure');
+    }
+    if(Math.floor(i/pageSize)===currentPage)cls.push('current');
+    if(submitted&&r&&!q.missing){
+      const d=r.d[i];cls=cls.filter(x=>!['answered','unsure'].includes(x));
+      if(d.disputedAnswered)cls.push('disputed-after');
+      else if(d.ok&&d.answered)cls.push('correct');
+      else if(d.pts>0)cls.push('partial');
+      else cls.push('wrong');
+      if(Math.floor(i/pageSize)===currentPage)cls.push('current');
+    }
+    return `<button class="${cls.join(' ')}" onclick="goQuestion(${i+1})">${i+1}</button>`;
+  }).join('');
+}
+function openNav(){renderNav();document.getElementById('navModal').classList.add('show')}
+function closeNav(){document.getElementById('navModal').classList.remove('show')}
+
+function buildResultText(){
+  const r=calc();
+  let t=`【2023年注册测绘师｜测绘管理与法律法规真题】
+得分：${r.score.toFixed(1)}/120
+完整答对/争议已答/缺失自动计分：${r.exact}/100
+确定答对：${r.solid}
+不确定/蒙的：${r.guessed}，其中蒙对${r.guessedCorrect}
+未作答：${r.unanswered}
+资料缺失自动计分：5题/10分（第96—100题）
+
+逐题结果：
+`;
+  r.d.forEach(x=>{
+    if(x.missing){
+      t+=`${x.i}. —｜资料缺失（自动2分）｜参考答案 —｜原资料缺失\n`;
+      return;
+    }
+    let st=x.disputedAnswered?'争议题（已作答）':(x.ok&&x.answered?'对':(x.pts>0?'少选':(x.answered?'错':'未作答')));
+    t+=`${x.i}. ${x.a}${x.g?' 【不确定/蒙】':''}｜${st}${x.disputed?'【争议题】':''}｜参考答案 ${x.c}｜${x.topic}\n`;
+  });
+  return t;
+}
+function fallbackCopy(text){
+  const ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.left='-9999px';ta.style.top='0';
+  document.body.appendChild(ta);ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);
+  let ok=false;try{ok=document.execCommand('copy')}catch(e){}document.body.removeChild(ta);
+  if(ok)document.getElementById('msg').textContent='已复制答题结果，可直接粘贴给 ChatGPT。';else showCopy(text);
+}
+function copyResults(){
+  const t=buildResultText();
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(t).then(()=>document.getElementById('msg').textContent='已复制答题结果，可直接粘贴给 ChatGPT。').catch(()=>fallbackCopy(t));
+  }else fallbackCopy(t);
+}
+function showCopy(t){document.getElementById('copyArea').value=t;document.getElementById('copyModal').classList.add('show');setTimeout(()=>{const a=document.getElementById('copyArea');a.focus();a.select()},30)}
+function closeCopy(){document.getElementById('copyModal').classList.remove('show')}
+function resetQuiz(){
+  if(!confirm('确定清空整套2023法规真题的全部答案、标记和提交状态吗？'))return;
+  try{localStorage.removeItem(quizId)}catch(e){}
+  currentPage=0;submitted=false;loadedState=null;
+  document.getElementById('result').className='result';document.getElementById('result').innerHTML='';
+  document.getElementById('msg').textContent='';renderPage();
+}
+window.addEventListener('keydown',e=>{
+  if(e.target&&['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  if(e.key==='ArrowLeft')prevPage();
+  if(e.key==='ArrowRight')nextPage();
+});
+renderPage();
+if(submitted)showResult();
+</script>
+</body>
+</html>
