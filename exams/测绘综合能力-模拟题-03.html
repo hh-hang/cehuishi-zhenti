@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>2026注册测绘师《测绘综合能力》考前最终押题卷</title>
+<style>
+:root{--bg:#070b10;--bg2:#0b121a;--card:#101923;--card2:#0b141d;--line:#263548;--text:#e8eef5;--muted:#9dabb9;--blue:#3b82f6;--green:#4ade80;--yellow:#fbbf24;--red:#fb7185}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.65}
+.wrap{width:min(1100px,100%);margin:auto;padding:20px 16px 150px}
+.hero,.topbar,.q,.result{background:var(--card);border:1px solid var(--line);border-radius:16px}
+.hero{padding:22px;margin-bottom:14px}
+.hero h1{margin:0 0 8px;font-size:27px}
+.hero p{margin:5px 0;color:#c7d2de}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.badge{font-size:12px;border:1px solid #34506f;background:#0b1826;padding:4px 9px;border-radius:999px;color:#bfdbfe}
+.topbar{position:sticky;top:5px;z-index:20;padding:10px 12px;margin-bottom:12px;background:rgba(10,17,24,.96);backdrop-filter:blur(12px)}
+.pbg{height:8px;background:#1a2635;border-radius:99px;overflow:hidden}
+.pbar{height:100%;width:0;background:#3b82f6}
+.toprow{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:#cbd5e1;margin-bottom:7px}
+.q{padding:16px;margin:10px 0}
+.qhead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.qt{font-weight:800;font-size:17px}
+.topic{font-size:12px;color:#9cc6ff;background:#0b1c2d;border:1px solid #294d73;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.opt{display:flex;gap:9px;padding:10px 9px;margin:6px 0;border:1px solid #27394d;border-radius:10px;background:#0b141d;cursor:pointer}
+.opt input{margin-top:4px;transform:scale(1.12)}
+.unsure{display:flex;align-items:center;gap:7px;margin-top:10px;color:#fcd34d;font-size:13px}
+.explain{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:#0a1823;border:1px solid #29465d;font-size:14px}
+.q.correct{border-color:#245c3a} .q.wrong{border-color:#713041}
+.actions{position:fixed;left:50%;transform:translateX(-50%);bottom:max(7px,env(safe-area-inset-bottom));width:min(1040px,calc(100% - 16px));display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px;background:rgba(7,12,18,.96);border:1px solid var(--line);border-radius:14px;z-index:30;backdrop-filter:blur(12px)}
+button{border:0;border-radius:10px;padding:11px 10px;font-weight:800;cursor:pointer;background:#1d4ed8;color:white}
+button.secondary{background:#1e293b} button.submit{background:#166534}
+.result{display:none;padding:16px;margin:14px 0}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.metric{background:#0b141d;border:1px solid #29394b;border-radius:10px;padding:10px;text-align:center}
+.metric b{display:block;font-size:22px}
+.pager{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:12px 0}
+.pageinfo{color:#cbd5e1;font-size:13px}
+.navgrid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-top:10px}
+.navgrid button{padding:7px 3px;background:#172235;font-size:12px}
+.navgrid button.answered{background:#1d4ed8} .navgrid button.guess{outline:2px solid #d7a00b} .navgrid button.ok{background:#166534} .navgrid button.bad{background:#8b1e2d}
+.copyarea{width:100%;height:250px;background:#07101a;color:#eef5fb;border:1px solid #30465c;border-radius:8px;padding:10px;margin-top:10px}
+@media(max-width:700px){
+.wrap{padding:12px 9px 145px} .hero{padding:16px 13px} .hero h1{font-size:21px}
+.metrics{grid-template-columns:1fr 1fr} .qt{font-size:16px} .q{padding:13px 10px} .navgrid{grid-template-columns:repeat(8,1fr)}
+.actions{grid-template-columns:1fr 1fr 1fr} button{font-size:12px;padding:9px 5px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="hero">
+<h1>2026注册测绘师《测绘综合能力》考前最终押题卷</h1>
+<p>100题：1—80单选，每题1分；81—100多选，每题2分；满分120分。</p>
+<p>定位：根据近三年真题风格与高频/轮换考点制作的考前预测卷，不代表官方命题。</p>
+<div class="badges"><span class="badge">近三年真题风格</span><span class="badge">计算 + 方法选择 + 规范判断</span><span class="badge">可标记“不确定/蒙”</span><span class="badge">提交后自动评分</span></div>
+</section>
+
+<section class="topbar">
+<div class="toprow"><span id="ptxt">已作答 0 / 100</span><span id="scoretop">未交卷</span></div>
+<div class="pbg"><div id="pbar" class="pbar"></div></div>
+</section>
+
+<div class="pager">
+<button class="secondary" onclick="prevPage()">上一页</button>
+<span class="pageinfo" id="pageinfo"></span>
+<button class="secondary" onclick="nextPage()">下一页</button>
+</div>
+
+<div id="quiz"></div>
+
+<section id="result" class="result">
+<h2>答题结果</h2>
+<div class="metrics">
+<div class="metric">得分<b id="score"></b></div>
+<div class="metric">完整答对<b id="exact"></b></div>
+<div class="metric">不确定/蒙<b id="guessed"></b></div>
+<div class="metric">未作答<b id="unanswered"></b></div>
+</div>
+<textarea id="copyArea" class="copyarea" readonly></textarea>
+</section>
+
+<div id="nav" class="navgrid"></div>
+</div>
+
+<div class="actions">
+<button class="secondary" onclick="prevPage()">上一页</button>
+<button onclick="nextPage()">下一页</button>
+<button class="submit" onclick="submitQuiz()">交卷评分</button>
+</div>
+
+<script>
+const qs=[{"t": "s", "topic": "大地测量", "q": "在大地测量外业观测中，仪器整平所依据的基本方向是（ ）。", "o": ["A. 椭球法线", "B. 铅垂线", "C. 子午线", "D. 坐标纵轴"], "a": ["B"], "e": "外业观测中，仪器的竖轴应与当地铅垂线一致。"}, {"t": "s", "topic": "大地测量", "q": "某点大地高 h=126.438 m，高程异常 ζ=35.216 m，则该点正常高 H 为（ ）m。", "o": ["A. 91.222", "B. 161.654", "C. 126.438", "D. 35.216"], "a": ["A"], "e": "正常高 H=h-ζ=126.438-35.216=91.222 m。"}, {"t": "s", "topic": "大地测量", "q": "采用GNSS载波相位观测时，同一卫星、两个接收机之间作一次差，可消除的主要误差是（ ）。", "o": ["A. 接收机钟差", "B. 卫星钟差", "C. 对流层延迟", "D. 多路径效应"], "a": ["B"], "e": "接收机间单差时，同一卫星的卫星钟差为公共项，可被消除。"}, {"t": "s", "topic": "大地测量", "q": "GNSS控制网完成基线解算后，在网平差前首先应重点进行（ ）。", "o": ["A. 基线质量检核", "B. 高程拟合", "C. 坐标投影", "D. 图幅分幅"], "a": ["A"], "e": "基线解算后应先检查重复基线、同步环、异步环等质量指标，再进入平差。"}, {"t": "s", "topic": "大地测量", "q": "GNSS控制网无约束平差的主要作用是（ ）。", "o": ["A. 强制成果进入CGCS2000", "B. 检查控制网内部观测的一致性", "C. 求取正常高", "D. 消除所有系统误差"], "a": ["B"], "e": "无约束平差主要检验网内部符合情况，为后续约束平差提供依据。"}, {"t": "s", "topic": "大地测量", "q": "某角独立等精度观测25次，单次观测中误差为5″，平均值中误差为（ ）。", "o": ["A. 0.2″", "B. 1.0″", "C. 2.5″", "D. 5.0″"], "a": ["B"], "e": "平均值中误差 m̄=m/√n=5/5=1″。"}, {"t": "s", "topic": "大地测量", "q": "3°分带高斯投影中，中央子午线经度为114°，其所在带的带号为（ ）。", "o": ["A. 18", "B. 19", "C. 38", "D. 39"], "a": ["C"], "e": "3°分带中央子午线 L0=3n，因此 n=114/3=38。"}, {"t": "s", "topic": "大地测量", "q": "在高斯平面直角坐标系中，为避免横坐标出现负值，通常对横坐标加（ ）。", "o": ["A. 100 km", "B. 300 km", "C. 500 km", "D. 1000 km"], "a": ["C"], "e": "高斯投影横坐标通常加500 km假东移。"}, {"t": "s", "topic": "大地测量", "q": "某闭合水准路线总长25 km，若允许闭合差按 ±4√L mm 计算，则允许闭合差为（ ）。", "o": ["A. ±10 mm", "B. ±20 mm", "C. ±25 mm", "D. ±100 mm"], "a": ["B"], "e": "±4√25=±20 mm。"}, {"t": "s", "topic": "大地测量", "q": "水准测量中前后视距尽量相等，主要用于削弱（ ）对高差的影响。", "o": ["A. 地球曲率与大气折光", "B. 尺长误差", "C. 水准尺零点误差", "D. 转点下沉"], "a": ["A"], "e": "前后视距相等可显著削弱视准轴误差，并使地球曲率和折光影响在高差中相互抵消。"}, {"t": "s", "topic": "大地测量", "q": "采用附合水准路线时，理论高差应等于（ ）。", "o": ["A. 0", "B. 起点高程减终点高程", "C. 终点高程减起点高程", "D. 各测段长度之和"], "a": ["C"], "e": "附合水准路线理论高差=终点已知高程-起点已知高程。"}, {"t": "s", "topic": "大地测量", "q": "关于粗差处理，正确的是（ ）。", "o": ["A. 直接通过平差平均掉", "B. 查明原因并剔除或重测", "C. 作为系统误差改正", "D. 只要闭合差合格即可保留"], "a": ["B"], "e": "粗差属于错误，应查明原因、剔除或重测，不能靠平差掩盖。"}, {"t": "s", "topic": "大地测量", "q": "似大地水准面模型主要用于（ ）。", "o": ["A. 将GNSS大地高转换为正常高", "B. 将方位角转换为象限角", "C. 将经纬度转换为像素坐标", "D. 将正高转换为深度"], "a": ["A"], "e": "利用高程异常ζ，可由H=h-ζ得到正常高。"}, {"t": "s", "topic": "大地测量", "q": "GNSS静态控制测量与RTK相比，最突出的优势是（ ）。", "o": ["A. 不需要卫星信号", "B. 适合建立较高精度控制网", "C. 可在室内直接测量", "D. 不需要任何后处理"], "a": ["B"], "e": "静态GNSS通过较长时间同步观测和基线处理，适用于高精度控制。"}, {"t": "s", "topic": "大地测量", "q": "某控制网中已知点坐标与新测网坐标系统不一致，正确处理方式是（ ）。", "o": ["A. 混合使用", "B. 以任一点平移即可", "C. 利用公共点求取转换参数并独立检核", "D. 只修改坐标小数位数"], "a": ["C"], "e": "不同坐标系统应通过公共点求转换参数，并用独立点检核精度。"}, {"t": "s", "topic": "工程测量", "q": "在高层建筑施工测量中，最需要重点控制的是（ ）。", "o": ["A. 海拔绝对值", "B. 竖向轴线偏差", "C. 地籍编号", "D. 图幅接边"], "a": ["B"], "e": "高层建筑施工测量的核心之一是保证轴线逐层传递的垂直度。"}, {"t": "s", "topic": "工程测量", "q": "施工坐标系与测量平面坐标系进行二维相似转换，至少需要（ ）个不重合公共点。", "o": ["A. 1", "B. 2", "C. 3", "D. 4"], "a": ["B"], "e": "二维相似转换包含平移、旋转和尺度参数，至少需要两个不重合公共点。"}, {"t": "s", "topic": "工程测量", "q": "道路纵断面图通常以（ ）为横坐标。", "o": ["A. 高程", "B. 高差", "C. 里程", "D. 坡度"], "a": ["C"], "e": "纵断面图一般以里程为横坐标、高程为纵坐标。"}, {"t": "s", "topic": "工程测量", "q": "测设已知水平角时，全站仪的主要观测量是（ ）。", "o": ["A. 竖直角", "B. 水平角", "C. 高差", "D. 天顶距差"], "a": ["B"], "e": "水平角放样本质是从已知方向转设设计角度。"}, {"t": "s", "topic": "工程测量", "q": "建筑物高精度垂直位移监测，优先采用（ ）。", "o": ["A. 水准测量", "B. RTK单点测量", "C. 罗盘测量", "D. 航海定位"], "a": ["A"], "e": "高精度垂直位移（沉降）监测通常优先采用精密水准测量。"}, {"t": "s", "topic": "工程测量", "q": "基坑水平位移监测中，若场地通视条件好、监测点数量较少，可优先采用（ ）。", "o": ["A. 全站仪极坐标法", "B. 水准测量", "C. 重力测量", "D. 磁法测量"], "a": ["A"], "e": "全站仪适合高精度水平位移和三维坐标监测。"}, {"t": "s", "topic": "工程测量", "q": "RTK测量开始作业前最重要的质量控制措施之一是（ ）。", "o": ["A. 关闭固定解", "B. 在已知点进行检核", "C. 删除坐标系统参数", "D. 只记录整数坐标"], "a": ["B"], "e": "已知点检核可确认坐标系统、改正参数及设备状态是否正确。"}, {"t": "s", "topic": "工程测量", "q": "高楼密集区采用RTK测量时，最主要的不利因素是（ ）。", "o": ["A. 多路径效应和卫星遮挡", "B. 地球自转", "C. 海潮", "D. 图廓线变形"], "a": ["A"], "e": "高层建筑会造成卫星遮挡和信号反射，导致多路径误差。"}, {"t": "s", "topic": "工程测量", "q": "地下工程中GNSS信号无法使用时，建立平面控制通常优先考虑（ ）。", "o": ["A. 全站仪导线", "B. 单点定位", "C. 航空摄影", "D. 海洋测深"], "a": ["A"], "e": "隧道、地下空间等无法接收GNSS信号时常用全站仪导线控制。"}, {"t": "s", "topic": "工程测量", "q": "某坡面坡度为5%，等高距为1 m，则相邻等高线间的实地水平距离为（ ）m。", "o": ["A. 5", "B. 10", "C. 20", "D. 50"], "a": ["C"], "e": "i=h/D，D=h/i=1/0.05=20 m。"}, {"t": "s", "topic": "工程测量", "q": "竣工测量成果最应反映的是（ ）。", "o": ["A. 设计位置", "B. 建成后的实际位置和尺寸", "C. 施工计划位置", "D. 初步设计位置"], "a": ["B"], "e": "竣工测量应以实测成果为依据，反映工程实体最终状态。"}, {"t": "s", "topic": "工程测量", "q": "变形监测中，基准点的首要要求是（ ）。", "o": ["A. 靠近变形区中心", "B. 稳定且不受监测对象变形影响", "C. 与监测点同一基础", "D. 便于施工机械经过"], "a": ["B"], "e": "基准点必须稳定，作为各期变形量比较的可靠基准。"}, {"t": "s", "topic": "工程测量", "q": "在变形监测中，多期观测应尽量保持仪器、方法、路线和观测条件一致，主要是为了（ ）。", "o": ["A. 增大观测量", "B. 减少系统性差异", "C. 改变坐标系统", "D. 降低图幅比例尺"], "a": ["B"], "e": "保持观测方案一致可提高各期成果可比性，减少系统性影响。"}, {"t": "s", "topic": "工程测量", "q": "隧道相向开挖时，贯通误差中对工程影响通常更敏感的是（ ）。", "o": ["A. 横向贯通误差", "B. 里程编号误差", "C. 图名误差", "D. 注记误差"], "a": ["A"], "e": "横向贯通误差直接影响隧道中线能否准确接合。"}, {"t": "s", "topic": "工程测量", "q": "采用全站仪极坐标法测设平面点位，至少需要已知（ ）。", "o": ["A. 一个测站点和一个定向方向", "B. 两个高程点", "C. 三个未知点", "D. 一个水准尺读数"], "a": ["A"], "e": "极坐标放样需已知测站坐标和定向方向，再按设计角度与距离放样。"}, {"t": "s", "topic": "海洋测绘", "q": "航海图通常采用（ ）投影。", "o": ["A. 墨卡托", "B. 高斯-克吕格", "C. 等距圆锥", "D. 彭纳"], "a": ["A"], "e": "墨卡托投影为等角投影，等方位航线在图上表现为直线，适合航海。"}, {"t": "s", "topic": "海洋测绘", "q": "海道测量中，水深成果通常需要归算到（ ）。", "o": ["A. 平均海面", "B. 深度基准面", "C. 椭球面", "D. 参考平面任意面"], "a": ["B"], "e": "水深测量需统一归算至规定的深度基准面。"}, {"t": "s", "topic": "海洋测绘", "q": "多波束测深相对于单波束测深的主要优势是（ ）。", "o": ["A. 完全不需要声速改正", "B. 可一次获取较宽条带的水深数据", "C. 不受船姿影响", "D. 不需要定位"], "a": ["B"], "e": "多波束可形成扇形波束，一次测量获得较宽覆盖条带。"}, {"t": "s", "topic": "海洋测绘", "q": "多波束测深中，为改正船体横摇、纵摇和艏向变化，需要使用（ ）。", "o": ["A. 姿态传感器", "B. 水准尺", "C. 经纬仪", "D. 重力仪"], "a": ["A"], "e": "姿态传感器用于记录横摇、纵摇、艏向等船姿信息。"}, {"t": "s", "topic": "海洋测绘", "q": "声速剖面测量的主要目的是（ ）。", "o": ["A. 改正声线传播路径和测深距离", "B. 改正GNSS卫星钟差", "C. 求地籍面积", "D. 绘制宗地图"], "a": ["A"], "e": "水体声速随深度变化，会影响声波传播路径和距离计算。"}, {"t": "s", "topic": "海洋测绘", "q": "潮位观测的主要用途之一是（ ）。", "o": ["A. 将实测水深归算到统一深度基准面", "B. 计算像片外方位元素", "C. 检查宗地拓扑", "D. 确定投影带号"], "a": ["A"], "e": "潮位改正用于把测深时刻的水深归算到统一深度基准面。"}, {"t": "s", "topic": "地籍测绘", "q": "地籍测量中，确定宗地权属范围的核心要素是（ ）。", "o": ["A. 界址点和界址线", "B. 等高线", "C. 航迹线", "D. 水深点"], "a": ["A"], "e": "宗地权属范围由界址点及其连接形成的界址线确定。"}, {"t": "s", "topic": "地籍测绘", "q": "变更地籍调查时，原有界址点未变化且保存完好，其编号一般应（ ）。", "o": ["A. 重新编号", "B. 沿用原编号", "C. 删除后再编号", "D. 改用临时编号"], "a": ["B"], "e": "未发生变化的界址点应保持编号连续性和可追溯性。"}, {"t": "s", "topic": "地籍测绘", "q": "宗地图最主要反映的是（ ）。", "o": ["A. 单宗地的权属界线及相关地物关系", "B. 全国行政区划", "C. 海底地形", "D. 遥感分类精度"], "a": ["A"], "e": "宗地图以一宗地为主要表达对象，反映其界址、邻宗和相关地物。"}, {"t": "s", "topic": "房产测绘", "q": "房屋调查与测量通常以（ ）为基本单元。", "o": ["A. 幢", "B. 宗地", "C. 街道", "D. 图幅"], "a": ["A"], "e": "房产测绘中通常以幢为房屋调查与测量的基本单元。"}, {"t": "s", "topic": "地籍测绘", "q": "地籍图与普通地形图相比，更突出表达（ ）。", "o": ["A. 权属界线与地籍要素", "B. 地貌晕渲", "C. 海流方向", "D. 航线重叠"], "a": ["A"], "e": "地籍图核心在于权属界线、宗地、界址点等地籍要素。"}, {"t": "s", "topic": "行政区域界线测绘", "q": "界桩点选取方位物的主要目的是（ ）。", "o": ["A. 便于界桩点日后寻找和恢复", "B. 增加界线长度", "C. 代替界桩坐标", "D. 计算房屋面积"], "a": ["A"], "e": "方位物应稳定、明显，用于界桩点的查找和恢复。"}, {"t": "s", "topic": "地籍测绘", "q": "地籍成果质量检查中，发现宗地面之间存在重叠和缝隙，主要属于（ ）问题。", "o": ["A. 拓扑一致性", "B. 卫星钟差", "C. 航向重叠", "D. 水深改正"], "a": ["A"], "e": "宗地面重叠、缝隙属于典型拓扑错误。"}, {"t": "s", "topic": "房产测绘", "q": "房产面积计算时，首先应依据（ ）。", "o": ["A. 房屋实际结构和用途及相应规则", "B. 房主口头估计", "C. 遥感像元个数", "D. 地图投影带号"], "a": ["A"], "e": "房产面积计算必须结合实际建筑结构、空间关系和现行计算规则。"}, {"t": "s", "topic": "测绘航空摄影", "q": "其他条件不变，航向重叠度增大时，摄影基线通常（ ）。", "o": ["A. 增大", "B. 减小", "C. 不变", "D. 等于航高"], "a": ["B"], "e": "重叠度越大，相邻曝光点间距越小，即摄影基线减小。"}, {"t": "s", "topic": "测绘航空摄影", "q": "相机焦距为50 mm，相对航高1000 m，像元尺寸5 μm，则GSD约为（ ）。", "o": ["A. 0.05 m", "B. 0.10 m", "C. 0.50 m", "D. 1.00 m"], "a": ["B"], "e": "GSD=H/f×像元尺寸=1000/0.05×5×10^-6=0.10 m。"}, {"t": "s", "topic": "测绘航空摄影", "q": "航空摄影中，航摄漏洞主要属于（ ）质量问题。", "o": ["A. 飞行质量", "B. 属性质量", "C. 地籍质量", "D. 水准质量"], "a": ["A"], "e": "航摄漏洞反映航线覆盖和重叠是否满足要求，属于飞行质量问题。"}, {"t": "s", "topic": "测绘航空摄影", "q": "同一航摄分区内，地形高差过大最直接会导致（ ）。", "o": ["A. 影像比例尺和GSD变化增大", "B. 卫星钟差增大", "C. 宗地拓扑错误", "D. 潮位改正失效"], "a": ["A"], "e": "相对航高随地面起伏变化，会导致影像比例尺、GSD和重叠变化。"}, {"t": "s", "topic": "测绘航空摄影", "q": "POS系统主要由GNSS与（ ）组合实现位置和姿态测量。", "o": ["A. IMU/INS", "B. 水准仪", "C. 管线仪", "D. 测深仪"], "a": ["A"], "e": "POS通常由GNSS与IMU/INS组合获取位置与姿态信息。"}, {"t": "s", "topic": "测绘航空摄影", "q": "为提高倾斜摄影对建筑物立面的获取能力，应重点保证（ ）。", "o": ["A. 多视角覆盖", "B. 只拍摄正下方", "C. 取消旁向重叠", "D. 只保留单航线"], "a": ["A"], "e": "倾斜摄影依靠多视角影像获取建筑侧立面和复杂结构。"}, {"t": "s", "topic": "测绘航空摄影", "q": "航空摄影时太阳高度角过低，最容易造成（ ）。", "o": ["A. 阴影过长", "B. GNSS基线过短", "C. 水准闭合差超限", "D. 地籍界线变化"], "a": ["A"], "e": "太阳高度角过低会形成过长阴影，遮挡地物细节。"}, {"t": "s", "topic": "测绘航空摄影", "q": "采用无人机航摄时，为避免漏摄，航线设计中最直接需要控制的是（ ）。", "o": ["A. 航向和旁向重叠度", "B. 地籍编号", "C. 潮位", "D. 水准尺零点"], "a": ["A"], "e": "合理的航向、旁向重叠是保证连续覆盖和立体测图的关键。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "由已知地面控制点及其像点坐标求解像片外方位元素的过程称为（ ）。", "o": ["A. 空间后方交会", "B. 空间前方交会", "C. 内定向", "D. 影像镶嵌"], "a": ["A"], "e": "空间后方交会由地面控制点反求像片外方位元素。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "由两张或多张影像中的同名像点求地面点三维坐标，属于（ ）。", "o": ["A. 空间前方交会", "B. 空间后方交会", "C. 内定向", "D. 辐射校正"], "a": ["A"], "e": "已知外方位元素，通过同名像点交会求地面坐标称空间前方交会。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "数字摄影测量中的影像相关，本质上是寻找（ ）。", "o": ["A. 同名点", "B. 等高线", "C. 宗地号", "D. 潮位站"], "a": ["A"], "e": "影像相关的核心是不同影像间同名点匹配。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "内定向的主要目的是（ ）。", "o": ["A. 恢复影像内部几何关系并建立像平面坐标系", "B. 求地面点高程", "C. 求地图比例尺", "D. 进行地籍编号"], "a": ["A"], "e": "内定向用于恢复摄影时影像坐标系统与内方位关系。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "相对定向的主要目的之一是（ ）。", "o": ["A. 恢复立体像对的相对位置关系", "B. 确定绝对国家坐标", "C. 计算宗地面积", "D. 改正潮位"], "a": ["A"], "e": "相对定向恢复两张像片间相对位置姿态，建立相对立体模型。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "绝对定向主要用于（ ）。", "o": ["A. 将立体模型纳入地面坐标系统", "B. 消除镜头畸变", "C. 提高扫描分辨率", "D. 测量声速"], "a": ["A"], "e": "绝对定向通过控制点完成模型的平移、旋转和尺度转换。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "SAR与可见光遥感相比，其突出特点是（ ）。", "o": ["A. 主动微波成像，可穿透云层", "B. 只能白天工作", "C. 无任何斑点噪声", "D. 不能用于形变监测"], "a": ["A"], "e": "SAR为主动微波遥感，可全天时全天候工作，并常用于InSAR形变监测。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "利用两期或多期SAR影像监测地表沉降，常用技术是（ ）。", "o": ["A. InSAR", "B. DOM镶嵌", "C. 影像锐化", "D. 单波束测深"], "a": ["A"], "e": "InSAR利用相位差反演地表形变。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "遥感影像中，空间分辨率主要描述（ ）。", "o": ["A. 地面最小可分辨目标尺度", "B. 波段数量", "C. 重访周期", "D. 灰度等级"], "a": ["A"], "e": "空间分辨率反映一个像元对应地面范围及可分辨目标尺度。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "同一传感器提高空间分辨率后，一般意味着单个像元覆盖的地面范围（ ）。", "o": ["A. 变小", "B. 变大", "C. 不变", "D. 变为0"], "a": ["A"], "e": "空间分辨率越高，单像元对应地面尺寸越小。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "监督分类与非监督分类的主要区别在于监督分类需要（ ）。", "o": ["A. 训练样本", "B. 潮位数据", "C. 水准闭合差", "D. 航线间隔"], "a": ["A"], "e": "监督分类需要人工提供有类别标签的训练样本。"}, {"t": "s", "topic": "摄影测量与遥感", "q": "DOM与普通原始航摄影像相比，最主要的特点是（ ）。", "o": ["A. 经过几何纠正，具有地图几何特性", "B. 不包含纹理", "C. 没有坐标", "D. 只能表达高程"], "a": ["A"], "e": "DOM经正射纠正后具有统一比例尺和地图几何特性。"}, {"t": "s", "topic": "GIS", "q": "检查面要素之间是否存在重叠、缝隙，主要采用（ ）。", "o": ["A. 拓扑检查", "B. 辐射校正", "C. 航向平差", "D. 潮位改正"], "a": ["A"], "e": "重叠、缝隙、自相交等属于拓扑一致性问题。"}, {"t": "s", "topic": "GIS", "q": "将道路中心线两侧100 m范围作为影响区，属于（ ）。", "o": ["A. 缓冲区分析", "B. 网络分析", "C. 插值分析", "D. 重分类"], "a": ["A"], "e": "按指定距离生成周边区域是典型缓冲区分析。"}, {"t": "s", "topic": "GIS", "q": "DEM最适合直接进行的分析是（ ）。", "o": ["A. 坡度坡向分析", "B. 邮政编码查询", "C. 权属确认", "D. 房产分摊"], "a": ["A"], "e": "DEM表达地形高程，可直接用于坡度、坡向、通视、流域等分析。"}, {"t": "s", "topic": "GIS", "q": "两个面图层叠加后需要同时保留双方属性并形成新的几何分区，最典型的是（ ）。", "o": ["A. 叠加分析", "B. 缓冲分析", "C. 投影转换", "D. 图像增强"], "a": ["A"], "e": "面图层叠加会形成新的几何单元并继承相关属性。"}, {"t": "s", "topic": "GIS", "q": "在GIS中，若要寻找两地点之间沿道路网络的最短路径，应采用（ ）。", "o": ["A. 网络分析", "B. 坡度分析", "C. 栅格重采样", "D. 影像融合"], "a": ["A"], "e": "最短路径、服务区等属于网络分析。"}, {"t": "s", "topic": "GIS", "q": "栅格数据重采样中，对分类数据最适合采用（ ）。", "o": ["A. 最邻近法", "B. 双线性插值", "C. 三次卷积", "D. 最小二乘"], "a": ["A"], "e": "分类数据不能产生新类别，最邻近法能保留原类别值。"}, {"t": "s", "topic": "GIS", "q": "空间数据库中，一个字段规定为整数类型却写入文本值，属于（ ）问题。", "o": ["A. 属性数据类型约束", "B. 几何拓扑", "C. 坐标投影", "D. 图幅接边"], "a": ["A"], "e": "字段数据类型不匹配属于属性结构或约束问题。"}, {"t": "s", "topic": "GIS", "q": "元数据的主要作用是（ ）。", "o": ["A. 描述数据的来源、坐标系、时间、精度等信息", "B. 替代原始数据", "C. 直接提高空间精度", "D. 自动消除所有拓扑错误"], "a": ["A"], "e": "元数据用于描述数据本身的背景、质量、时空参考和生产信息。"}, {"t": "s", "topic": "地图制图", "q": "比例尺1∶2000的地图上1 mm代表实地（ ）。", "o": ["A. 0.2 m", "B. 2 m", "C. 20 m", "D. 200 m"], "a": ["B"], "e": "1 mm×2000=2000 mm=2 m。"}, {"t": "s", "topic": "地图制图", "q": "比例尺由1∶1000变为1∶5000时，地图表达的地物通常需要（ ）。", "o": ["A. 制图综合", "B. 增加更多细节", "C. 完全不变", "D. 取消比例尺"], "a": ["A"], "e": "比例尺缩小后需对要素进行选取、化简、合并、移位等制图综合。"}, {"t": "s", "topic": "地图制图", "q": "等角投影的主要性质是（ ）。", "o": ["A. 小范围角度保持正确", "B. 面积处处保持不变", "C. 距离处处不变", "D. 高程不变"], "a": ["A"], "e": "等角投影保持局部角度和形状。"}, {"t": "s", "topic": "地图制图", "q": "在专题地图中，用不同颜色深浅表示各行政区人口密度，属于（ ）。", "o": ["A. 分级统计图法", "B. 定点符号法", "C. 运动线法", "D. 质底法"], "a": ["A"], "e": "按统计区分级并用颜色深浅表达统计指标属于分级统计图法。"}, {"t": "s", "topic": "地图制图", "q": "地图上河流由上游到下游线宽逐渐加粗，主要体现（ ）。", "o": ["A. 水系等级和主次关系", "B. 地籍权属", "C. 航摄重叠", "D. 水准等级"], "a": ["A"], "e": "水系制图综合中常通过线宽和连续性体现河流等级与主次。"}, {"t": "s", "topic": "地图制图", "q": "地图整饰内容通常不包括（ ）。", "o": ["A. 图名", "B. 比例尺", "C. 图例", "D. GNSS原始载波相位观测值"], "a": ["D"], "e": "地图整饰包含图名、图例、比例尺、指北针、图廓等，不包括原始观测值。"}, {"t": "s", "topic": "地图制图", "q": "专题地图编制时，专题要素与地理底图之间首先应保证（ ）。", "o": ["A. 坐标系统和空间位置一致", "B. 文件名一致", "C. 字体完全一致", "D. 数据大小一致"], "a": ["A"], "e": "不同数据叠加前必须保证坐标参考和空间配准正确。"}, {"t": "s", "topic": "地图制图", "q": "制图综合中，为避免重要地物符号相互压盖，可采用（ ）。", "o": ["A. 移位", "B. 增加投影带号", "C. 水准平差", "D. 潮位改正"], "a": ["A"], "e": "移位是制图综合常用手段，用于改善符号冲突和可读性。"}, {"t": "m", "topic": "大地测量", "q": "GNSS控制网基线质量检核通常可包括（ ）。", "o": ["A. 重复基线较差", "B. 同步环闭合差", "C. 异步环闭合差", "D. 水准路线闭合差", "E. 基线解算质量指标"], "a": ["A", "B", "C", "E"], "e": "水准路线闭合差属于高程测量检核，不是GNSS基线检核内容。"}, {"t": "m", "topic": "大地测量", "q": "关于水准测量质量控制，正确的有（ ）。", "o": ["A. 前后视距尽量相等", "B. 转点应稳固", "C. 水准尺应竖直", "D. 闭合差超限仍可强制平差", "E. 仪器应按要求检验校正"], "a": ["A", "B", "C", "E"], "e": "闭合差超限应查因、复测或返工，不能强制平差。"}, {"t": "m", "topic": "工程测量", "q": "RTK碎部点测量时，合理的质量控制措施有（ ）。", "o": ["A. 作业前已知点检核", "B. 确认固定解稳定", "C. 正确量取并输入天线高", "D. 重要点重复测量或抽检", "E. 所有碎部点都必须进行控制网平差"], "a": ["A", "B", "C", "D"], "e": "普通RTK碎部点不需要逐点进行控制网平差。"}, {"t": "m", "topic": "工程测量", "q": "可用于工程变形监测的方法有（ ）。", "o": ["A. 精密水准", "B. 全站仪", "C. GNSS", "D. 近景摄影测量", "E. InSAR"], "a": ["A", "B", "C", "D", "E"], "e": "不同变形对象、范围和精度可采用不同监测手段。"}, {"t": "m", "topic": "工程测量", "q": "变形监测方案设计时，应考虑（ ）。", "o": ["A. 监测对象和变形特征", "B. 精度要求", "C. 监测周期", "D. 基准点稳定性", "E. 施工环境"], "a": ["A", "B", "C", "D", "E"], "e": "这些都是监测方案设计的关键因素。"}, {"t": "m", "topic": "海洋测绘", "q": "多波束测深系统常需要的辅助信息包括（ ）。", "o": ["A. 高精度定位", "B. 船姿信息", "C. 声速剖面", "D. 潮位或垂直基准信息", "E. 宗地界址点"], "a": ["A", "B", "C", "D"], "e": "多波束测深需要定位、姿态、声速和垂直基准等信息。"}, {"t": "m", "topic": "地籍测绘", "q": "地籍成果质量检查常包括（ ）。", "o": ["A. 界址点位置精度", "B. 宗地属性正确性", "C. 宗地面拓扑一致性", "D. 成果完整性", "E. 现势性"], "a": ["A", "B", "C", "D", "E"], "e": "地籍成果既要检查空间位置，也要检查属性、拓扑、完整性与现势性。"}, {"t": "m", "topic": "测绘航空摄影", "q": "影响航空摄影成果质量的因素有（ ）。", "o": ["A. 航向重叠", "B. 旁向重叠", "C. 航线弯曲", "D. 影像清晰度", "E. 航摄漏洞"], "a": ["A", "B", "C", "D", "E"], "e": "以上均会影响航摄覆盖、几何质量或影像质量。"}, {"t": "m", "topic": "摄影测量与遥感", "q": "关于SAR/InSAR，正确的有（ ）。", "o": ["A. SAR属于主动微波遥感", "B. SAR可穿透云层", "C. SAR影像常有斑点噪声", "D. InSAR可用于地表形变监测", "E. SAR只能在白天工作"], "a": ["A", "B", "C", "D"], "e": "SAR可昼夜工作，不受太阳照明限制。"}, {"t": "m", "topic": "摄影测量与遥感", "q": "摄影测量中外方位元素包括（ ）。", "o": ["A. 摄影中心坐标X、Y、Z", "B. 三个姿态角", "C. 焦距", "D. 主点坐标", "E. 摄影比例尺分母"], "a": ["A", "B"], "e": "外方位元素由摄影中心三维坐标和三个姿态角组成；焦距、主点坐标属内方位元素。"}, {"t": "m", "topic": "GIS", "q": "DEM常见分析功能包括（ ）。", "o": ["A. 坡度坡向", "B. 通视分析", "C. 流域分析", "D. 剖面分析", "E. 地形阴影"], "a": ["A", "B", "C", "D", "E"], "e": "这些均是DEM常见地形分析功能。"}, {"t": "m", "topic": "GIS", "q": "GIS拓扑检查可发现（ ）。", "o": ["A. 面重叠", "B. 面缝隙", "C. 线悬挂", "D. 自相交", "E. 字段类型错误"], "a": ["A", "B", "C", "D"], "e": "字段类型错误属于属性结构问题，不属于几何拓扑错误。"}, {"t": "m", "topic": "GIS", "q": "元数据通常可包含（ ）。", "o": ["A. 数据来源", "B. 坐标参考系统", "C. 生产时间", "D. 精度信息", "E. 数据格式"], "a": ["A", "B", "C", "D", "E"], "e": "元数据用于描述数据来源、时空参考、质量、格式等。"}, {"t": "m", "topic": "地图制图", "q": "常见制图综合方法包括（ ）。", "o": ["A. 选取", "B. 化简", "C. 合并", "D. 移位", "E. 夸大"], "a": ["A", "B", "C", "D", "E"], "e": "这五类均是比例尺缩小时常见的制图综合处理。"}, {"t": "m", "topic": "地图制图", "q": "专题地图整饰通常包括（ ）。", "o": ["A. 图名", "B. 图例", "C. 比例尺", "D. 指北针或方向说明", "E. 图廓及必要注记"], "a": ["A", "B", "C", "D", "E"], "e": "这些均属于常见地图整饰内容。"}, {"t": "m", "topic": "质量检查", "q": "测绘成果质量检查通常应关注（ ）。", "o": ["A. 数学精度", "B. 属性正确性", "C. 完整性", "D. 逻辑一致性", "E. 现势性"], "a": ["A", "B", "C", "D", "E"], "e": "这是各类测绘成果通用的质量检查维度。"}, {"t": "m", "topic": "工程测量", "q": "地下管线探测中，可能使用的设备有（ ）。", "o": ["A. 管线探测仪", "B. 地质雷达", "C. 全站仪", "D. GNSS RTK", "E. 水准仪"], "a": ["A", "B", "C", "D", "E"], "e": "探测隐蔽管线可用管线仪/地质雷达，点位测量可用全站仪、RTK，必要时高程可用水准仪。"}, {"t": "m", "topic": "摄影测量与遥感", "q": "DOM生产通常可能涉及（ ）。", "o": ["A. 影像纠正", "B. DEM/DSM辅助", "C. 镶嵌", "D. 匀色", "E. 成果检查"], "a": ["A", "B", "C", "D", "E"], "e": "DOM生产通常包括纠正、镶嵌、色彩处理和质量检查等环节。"}, {"t": "m", "topic": "大地测量", "q": "坐标系统转换时，合理做法有（ ）。", "o": ["A. 选择分布合理的公共点", "B. 求取转换参数", "C. 使用独立检查点检核", "D. 检查残差与精度", "E. 不同系统坐标直接混合使用"], "a": ["A", "B", "C", "D"], "e": "不同坐标系统不能直接混用，应进行参数转换和独立检核。"}, {"t": "m", "topic": "综合", "q": "测绘项目提交成果时，通常应考虑的资料类别有（ ）。", "o": ["A. 最终成果数据或图件", "B. 原始观测记录", "C. 计算与平差资料", "D. 质量检查与验收资料", "E. 技术设计、技术总结及元数据"], "a": ["A", "B", "C", "D", "E"], "e": "完整成果通常不仅包括最终产品，还包括原始、计算、质量和技术文档资料。"}];
+const pageSize=10,totalPages=Math.ceil(qs.length/pageSize);
+let currentPage=0,submitted=false;
+const quizId='chs2026-final-predict-100-v1';
+
+function load(){
+ let s=null; try{s=JSON.parse(localStorage.getItem(quizId)||'null')}catch(e){}
+ if(!s) s={answers:Array(qs.length).fill(null).map(()=>[]),guesses:Array(qs.length).fill(false),currentPage:0,submitted:false};
+ currentPage=s.currentPage||0; submitted=!!s.submitted;
+ return s;
+}
+let state=load();
+
+function save(){
+ state.currentPage=currentPage; state.submitted=submitted;
+ try{localStorage.setItem(quizId,JSON.stringify(state))}catch(e){}
+}
+function sameSet(a,b){return a.length===b.length&&a.every(x=>b.includes(x))}
+function calc(){
+ let score=0,exact=0,guessed=0,unanswered=0,details=[];
+ qs.forEach((q,i)=>{
+   let a=state.answers[i]||[], c=q.a, ok=sameSet(a,c), pts=0;
+   if(!a.length) unanswered++;
+   if(state.guesses[i]) guessed++;
+   if(q.t==='s') pts=ok?1:0;
+   else{ const wrong=a.some(x=>!c.includes(x)); if(wrong)pts=0; else if(ok)pts=2; else pts=a.length*0.5; }
+   if(ok&&a.length) exact++;
+   score+=pts; details.push({i:i+1,a:a.join('')||'-',c:c.join(''),ok,pts,g:!!state.guesses[i],topic:q.topic});
+ });
+ return {score,exact,guessed,unanswered,details};
+}
+function updateTop(){
+ const n=state.answers.filter(a=>a&&a.length).length;
+ document.getElementById('ptxt').textContent=`已作答 ${n} / 100`;
+ document.getElementById('pbar').style.width=(n/100*100)+'%';
+ document.getElementById('scoretop').textContent=submitted?`已交卷：${calc().score.toFixed(1)} / 120`:'未交卷';
+}
+function render(){
+ const box=document.getElementById('quiz'); box.innerHTML='';
+ const start=currentPage*pageSize,end=Math.min(qs.length,start+pageSize);
+ for(let i=start;i<end;i++){ const q=qs[i], div=document.createElement('section'); div.className='q';
+   if(submitted) div.classList.add(sameSet(state.answers[i]||[],q.a)?'correct':'wrong');
+   const inputType=q.t==='s'?'radio':'checkbox';
+   div.innerHTML=`<div class="qhead"><div class="qt">${i+1}. ${q.q}</div><span class="topic">${q.topic}｜${q.t==='s'?'单选':'多选'}</span></div>
+   <div class="opts">${q.o.map(opt=>{let key=opt[0],checked=(state.answers[i]||[]).includes(key)?'checked':'';return `<label class="opt"><input type="${inputType}" name="q${i}" value="${key}" ${checked} ${submitted?'disabled':''} onchange="pick(${i},'${key}',this.checked)"><span>${opt}</span></label>`}).join('')}</div>
+   <label class="unsure"><input type="checkbox" ${state.guesses[i]?'checked':''} ${submitted?'disabled':''} onchange="guess(${i},this.checked)"> 不确定 / 蒙</label>
+   <div class="explain" style="${submitted?'display:block':''}"><b>${sameSet(state.answers[i]||[],q.a)?'✓ 正确':'✗ 参考答案 '+q.a.join('')}</b><br>${q.e}</div>`;
+   box.appendChild(div);
+ }
+ document.getElementById('pageinfo').textContent=`第 ${currentPage+1} / ${totalPages} 页（${start+1}—${end}题）`;
+ renderNav();updateTop();save();
+}
+function pick(i,key,checked){
+ let a=state.answers[i]||[];
+ if(qs[i].t==='s') a=checked?[key]:[];
+ else{ if(checked&&!a.includes(key))a.push(key); if(!checked)a=a.filter(x=>x!==key); a.sort(); }
+ state.answers[i]=a; updateTop();renderNav();save();
+}
+function guess(i,v){state.guesses[i]=v;renderNav();save();}
+function prevPage(){if(currentPage>0){currentPage--;render();window.scrollTo({top:0,behavior:'smooth'})}}
+function nextPage(){if(currentPage<totalPages-1){currentPage++;render();window.scrollTo({top:0,behavior:'smooth'})}}
+function gotoQ(i){currentPage=Math.floor(i/pageSize);render();setTimeout(()=>document.querySelectorAll('.q')[i%pageSize]?.scrollIntoView({behavior:'smooth',block:'start'}),80)}
+function renderNav(){
+ const r=submitted?calc():null; const nav=document.getElementById('nav');
+ nav.innerHTML=qs.map((q,i)=>{let cls=[];if((state.answers[i]||[]).length)cls.push('answered');if(state.guesses[i])cls.push('guess');if(submitted)cls.push(r.details[i].ok?'ok':'bad');return `<button class="${cls.join(' ')}" onclick="gotoQ(${i})">${i+1}</button>`}).join('');
+}
+function buildText(){
+ const r=calc(); let s=`【2026注册测绘师｜测绘综合能力考前最终押题卷】\n得分：${r.score.toFixed(1)}/120\n完整答对：${r.exact}/100\n不确定/蒙：${r.guessed}\n未作答：${r.unanswered}\n\n逐题结果：\n`;
+ r.details.forEach(x=>s+=`${x.i}. ${x.a}${x.g?'【不确定/蒙】':''}｜${x.ok?'对':(x.pts>0?'少选':'错')}｜参考答案 ${x.c}｜${x.topic}\n`);
+ return s;
+}
+function submitQuiz(){
+ if(submitted) return;
+ if(!confirm('确定交卷并查看答案吗？'))return;
+ submitted=true; save(); const r=calc();
+ document.getElementById('result').style.display='block';
+ document.getElementById('score').textContent=r.score.toFixed(1)+'/120';
+ document.getElementById('exact').textContent=r.exact+'/100';
+ document.getElementById('guessed').textContent=r.guessed;
+ document.getElementById('unanswered').textContent=r.unanswered;
+ document.getElementById('copyArea').value=buildText();
+ render(); setTimeout(()=>document.getElementById('result').scrollIntoView({behavior:'smooth'}),100);
+}
+if(submitted){
+ const r=calc();document.getElementById('result').style.display='block';
+ document.getElementById('score').textContent=r.score.toFixed(1)+'/120';
+ document.getElementById('exact').textContent=r.exact+'/100';
+ document.getElementById('guessed').textContent=r.guessed;
+ document.getElementById('unanswered').textContent=r.unanswered;
+ document.getElementById('copyArea').value=buildText();
+}
+render();
+</script>
+</body>
+</html>
